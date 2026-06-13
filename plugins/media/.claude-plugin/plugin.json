@@ -1,0 +1,6 @@
+{
+  "name": "media",
+  "description": "Media generation: images, video, audio, screenshots, transcripts, Remotion. (9 skills)",
+  "version": "1.0.0",
+  "author": { "name": "George Lane", "email": "georgejlane@icloud.com" }
+}

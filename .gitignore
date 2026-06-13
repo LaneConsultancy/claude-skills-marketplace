@@ -1,0 +1,16 @@
+.DS_Store
+.env
+*.env
+.venv/
+venv/
+node_modules/
+__pycache__/
+*.pyc
+*.backup
+.api-key
+*.api-key
+*.key
+*secrets*
+credentials*
+.npmrc
+.netrc

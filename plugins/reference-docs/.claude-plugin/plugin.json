@@ -1,0 +1,6 @@
+{
+  "name": "reference-docs",
+  "description": "Reference and document tooling: doc creation, PDF handling, OpenAI docs. (3 skills)",
+  "version": "1.0.0",
+  "author": { "name": "George Lane", "email": "georgejlane@icloud.com" }
+}
