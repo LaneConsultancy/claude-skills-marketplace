@@ -4,7 +4,7 @@
   "metadata": { "description": "George Lane's skill library: marketing, SEO, copy, CRO, ads, dev workflow.", "version": "1.0.0" },
   "plugins": [
     { "name": "ads", "source": "./plugins/ads", "description": "Paid advertising: Google, Meta, Facebook campaigns, ad copy, and analytics tracking. (12 skills)", "version": "1.0.0" },
-    { "name": "business-ops", "source": "./plugins/business-ops", "description": "Business operations and integrations: GTD, X/Twitter, Retell AI, Cloudways, Namecheap. (6 skills)", "version": "1.0.0" },
+    { "name": "business-ops", "source": "./plugins/business-ops", "description": "Business operations and integrations: GTD, X/Twitter, Hermes Tweet, Retell AI, Cloudways, Namecheap. (7 skills)", "version": "1.0.0" },
     { "name": "copywriting", "source": "./plugins/copywriting", "description": "Copywriting and content: sales copy, email, social, voice, editing, anti-slop. (20 skills)", "version": "1.0.0" },
     { "name": "cro", "source": "./plugins/cro", "description": "Conversion rate optimization: landing pages, forms, popups, signup/onboarding, A/B testing. (10 skills)", "version": "1.0.0" },
     { "name": "dev-workflow", "source": "./plugins/dev-workflow", "description": "Development workflow: TDD, debugging, planning, code review, git worktrees, security. (18 skills)", "version": "1.0.0" },

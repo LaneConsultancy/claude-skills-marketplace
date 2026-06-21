@@ -1,6 +1,6 @@
 # george-skills
 
-A Claude plugin marketplace bundling George Lane's skill library — marketing, SEO, copywriting, CRO, paid ads, development workflow, media, and more. 122 skills across 10 themed plugins.
+A Claude plugin marketplace bundling George Lane's skill library - marketing, SEO, copywriting, CRO, paid ads, development workflow, media, and more. 123 skills across 10 themed plugins.
 
 ## Add this marketplace
 
@@ -24,7 +24,7 @@ A Claude plugin marketplace bundling George Lane's skill library — marketing, 
 | `cro` | 10 | Landing pages, forms, popups, signup/onboarding, A/B |
 | `media` | 9 | Image/video/audio generation, screenshots, transcripts |
 | `web-dev` | 9 | Site builders, UI design, Playwright, deploys |
-| `business-ops` | 6 | GTD, X/Twitter, Retell AI, Cloudways, Namecheap |
+| `business-ops` | 7 | GTD, X/Twitter, Hermes Tweet, Retell AI, Cloudways, Namecheap |
 | `reference-docs` | 3 | Doc creation, PDF handling, OpenAI docs |
 
 ## Updating
