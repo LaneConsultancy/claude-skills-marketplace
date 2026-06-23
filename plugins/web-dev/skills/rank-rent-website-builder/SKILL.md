@@ -15,8 +15,8 @@ The goal is a focused local lead-generation site that can rank for a single serv
 - Use close variants only when they support the primary intent.
 - Default framework: Astro. Do not switch stacks unless the user explicitly asks.
 - Conversion comes first: visible phone CTA, short enquiry form, urgent/local intent above the fold.
-- SEO comes before design polish: SERP reality, page intent, keyword map, schema, internal links, fast static pages.
-- Be truthful. Do not invent NAP, addresses, GBP, reviews, accreditations, business history, staff, operators, engineers, years trading, or certifications.
+- SEO, conversion, and design quality must work together: SERP reality, page intent, keyword map, schema, internal links, fast static pages, and production-grade frontend craft.
+- Be truthful. Do not invent NAP, addresses, GBP, reviews, accreditations, business history, named technicians, staff, operators, clinicians, tradespeople, specialists, providers, years trading, certifications, or memberships.
 - Do not use review schema unless reviews are real; use LocalBusiness schema only with truthful, publishable NAP/contact details.
 - Do not interlink owned rank-and-rent sites or link them back to the agency/main domain as an owned network footprint.
 - Default to a tight v1 site. Use service x location matrix mode only with SERP, volume, and unique-content justification.
@@ -27,9 +27,9 @@ The goal is a focused local lead-generation site that can rank for a single serv
 
 Collect or infer these before building:
 
-- Primary keyword: e.g. `mobile mechanic Colchester`
-- Main service: e.g. `mobile mechanic`
-- Microvertical: e.g. `emergency mobile mechanics`, `toilet repairs`
+- Primary keyword: e.g. `mobile mechanic Colchester`, `private physiotherapist Bath`, or `emergency locksmith York`
+- Main service: e.g. `mobile mechanic`, `private physiotherapist`, or `emergency locksmith`
+- Microvertical: e.g. `emergency mobile mechanics`, `sports injury physiotherapy`, or `lockouts`
 - Location: e.g. `Colchester`
 - Domain: exact/partial match if known
 - Map-pack strength and organic opportunity
@@ -109,10 +109,10 @@ Write conversion-first local SEO copy:
 - Hero: service + location obvious in the H1 or immediate supporting line.
 - Above fold: phone CTA, form CTA, service area, fast reassurance.
 - Sections: emergency/routine intent, services handled, how it works, service area, FAQs, trust/verification language, final CTA.
-- Use realistic local language without pretending to have a physical office or named mechanics unless true.
-- Include variant phrases naturally: `emergency`, `diagnostics`, `at home`, `near me`, `same-day`, `car repair`, and model/service variants where relevant.
+- Use realistic local language without pretending to have a physical office or named technicians, staff, operators, clinicians, tradespeople, specialists, or providers unless true.
+- Include variant phrases naturally based on the niche, such as `emergency`, `same-day`, `at home`, `near me`, `diagnostics`, `repair`, `consultation`, `installation`, `maintenance`, and service/product variants where relevant.
 - FAQs should answer buying-intent questions, not generic filler.
-- Never claim guaranteed rankings, fake reviews, fake local address, fake GBP, fake operators, fake staff, or fake memberships.
+- Never claim guaranteed rankings, fake reviews, fake local address, fake GBP, fake named providers, fake staff, or fake memberships.
 - Use transparent lead-gen wording until a real contractor/renter relationship exists.
 
 ## Astro Implementation
@@ -146,15 +146,18 @@ RENTER_FORWARDING_PHONE=
 TWILIO_PHONE_NUMBER=
 ```
 
-## Design Direction
+## Frontend Design Standard
 
-Rank-and-rent sites should feel like practical local service sites, not speculative startups.
+New public-facing rank-and-rent sites must use the `impeccable` design skill/guidance during frontend shaping, implementation, and polish. Treat frontend craft as part of conversion and SEO quality, not afterthought polish.
 
-- First viewport must signal service + location + call action.
-- Use domain-relevant imagery or generated assets; avoid vague stock atmospheres.
-- Prioritize scan speed, trust, and contact paths.
-- Keep design distinctive but restrained. A small local service site should not look like a SaaS landing page.
-- Test long business names, phone numbers, service names, and nearby-location names on mobile.
+- Produce production-grade, visually distinctive frontend work; avoid template-looking local-service pages.
+- Choose the design direction from the niche, audience, physical service context, and search intent, not from category reflex.
+- Use strong typography, spacing rhythm, image/art direction, accessible contrast, mobile-first layout, and deliberate CTA hierarchy.
+- Use real, licensed, domain-relevant imagery or good generated imagery where appropriate; avoid decorative empty panels and vague stock atmospheres.
+- Avoid AI-looking defaults: repeated card grids, tiny uppercase eyebrows on every section, beige/cream monoculture, generic stock atmospheres, gradient text, default glassmorphism, overflow, and weak contrast.
+- First viewport must signal service + location + call action without making the page generic.
+- Test mobile, tablet, and desktop with realistic long site names, phone numbers, service names, location strings, and nearby-area names.
+- Keep conversion and local SEO strong throughout; design choices must make trust, clarity, and contact paths stronger.
 
 ## Build Workflow
 
@@ -172,19 +175,27 @@ Rank-and-rent sites should feel like practical local service sites, not speculat
    - Write page copy before coding.
    - Keep all launch copy free of placeholders and fake proof.
 
-4. **Astro Build**
+4. **Frontend Shaping**
+   - Apply `impeccable` design guidance before coding public UI.
+   - Define the niche-specific design direction, image/art direction, typography/spacing rhythm, CTA hierarchy, and mobile-first layout approach.
+   - Reject template-looking or AI-default patterns before implementation.
+
+5. **Astro Build**
    - Scaffold or update the Astro project.
    - Implement real content, forms/CTAs, metadata, schema, sitemap, and legal pages.
    - Keep owned-site interlinks and agency-network links out of launch pages.
+   - Carry the `impeccable` design direction through components, spacing, imagery, contrast, and responsive states.
 
-5. **Verification**
+6. **Verification**
    - Start dev server before frontend edits.
    - Use browser automation to screenshot 375px, 768px, and 1440px.
    - Check console and failed network requests.
    - Run accessibility checks, including axe where possible.
+   - Verify the frontend design standard: distinctive niche fit, strong typography/spacing, domain-relevant imagery, accessible contrast, deliberate CTA hierarchy, and no template/AI-default patterns.
+   - Check realistic long site names, phone numbers, service names, location strings, and nearby-area names at each viewport.
    - Run production build and verify production rendering.
 
-6. **Handoff**
+7. **Handoff**
    - Summarize pages built, keyword targets, lead routing status, contractor/renter status, agreement-before-release status, backlink opportunities, and remaining launch blockers.
    - Add the post-launch Google Search Console loop: review position 7-33 doorstep keywords and impression-rich queries, then improve existing pages or add justified support pages.
 
@@ -197,12 +208,16 @@ Do not call a site complete until:
 - Top competitor/backlink notes exist.
 - Matrix mode is either off or justified with SERP/volume/unique-content evidence.
 - No placeholder launch copy remains.
-- No fake NAP, GBP, reviews, accreditations, staff, operators, LocalBusiness schema, or review schema.
+- No fake NAP, GBP, reviews, accreditations, named providers, staff, LocalBusiness schema, or review schema.
 - No owned-site interlink/PBN-style footprint exists.
 - Phone/form CTAs are wired or explicitly marked as awaiting real routing.
 - Lead qualification fields and speed-to-lead target are documented.
 - Contractor/renter status, agreement-before-release status, and intro offer status are documented.
 - Metadata, schema, sitemap, privacy policy, and terms exist.
+- `impeccable` frontend design guidance has been applied during shaping, implementation, and polish.
+- Visual direction is niche-specific, production-grade, and not a generic local-service template.
+- Typography, spacing, imagery, accessible contrast, mobile-first layout, and CTA hierarchy are verified.
+- Realistic long site names, phone numbers, service names, location strings, and nearby-area names have been tested at 375px, 768px, and 1440px.
 - Post-launch GSC doorstep keyword loop is documented.
 - Dev and production builds pass.
 - Mobile, tablet, and desktop screenshots are clean.
