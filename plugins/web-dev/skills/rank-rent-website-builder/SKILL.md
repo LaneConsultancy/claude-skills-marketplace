@@ -159,6 +159,21 @@ New public-facing rank-and-rent sites must use the `impeccable` design skill/gui
 - Test mobile, tablet, and desktop with realistic long site names, phone numbers, service names, location strings, and nearby-area names.
 - Keep conversion and local SEO strong throughout; design choices must make trust, clarity, and contact paths stronger.
 
+## Image Asset Generation
+
+When a rank-and-rent site needs generated raster imagery, the builder may invoke `imagegen` and/or `generate-image` according to the active runtime/tool availability and each image skill's own workflow. Use generated images only when they can support trust, clarity, conversion, and the niche-specific design direction.
+
+- Generate or select domain-relevant assets: hero images, service imagery, textures, illustrations, or cutouts must support the specific service, location intent, audience, and conversion path.
+- Do not use vague generic stock atmospheres, decorative empty panels, fake local scenes, fake staff/operators/providers, fake proof, fake reviews, fake NAP, fake logos, or misleading evidence of local presence.
+- Prompts must include production constraints: no AI-looking artifacts, no garbled text/words/logos unless exact text is intentionally added later, realistic physical details for tools/equipment/people/places, truthful local context, accurate scale, and consistent lighting/shadows.
+- For people, vehicles, tools, equipment, premises, technical scenes, or location cues, make physical details plausible enough that a trade professional, service provider, or client would not spot them as fake.
+- Inspect each saved output visually with `view_image` or an equivalent image viewer when available before accepting it.
+- Reject and regenerate images with weird artifacts, distorted anatomy/hands/faces, impossible tools/equipment/connections, phantom objects, garbled text, over-smooth/plastic skin, inconsistent lighting/shadows, broken scale, generic AI gloss, or anything a trade/professional/client would spot as fake.
+- Save accepted project-bound images into the site workspace, such as `public/images/` or the appropriate Astro asset path. Never leave project-referenced assets only in a generated, temp, default tool, or external cache folder.
+- Verify final accepted images inside the actual page/browser at 375px, 768px, and 1440px as part of visual QA, including crop, focal point, contrast with overlaid content, file loading, and performance.
+- Record the final image path, generation skill/tool, prompt or source summary, and QC status in `spec/build-state.md` or a dedicated image asset note.
+- If generated imagery still fails QC after reasonable attempts, switch to licensed stock, real photography, a simpler illustration/vector/code-native asset, or no image rather than shipping a bad AI-looking asset.
+
 ## Build Workflow
 
 1. **Brief**
@@ -178,6 +193,7 @@ New public-facing rank-and-rent sites must use the `impeccable` design skill/gui
 4. **Frontend Shaping**
    - Apply `impeccable` design guidance before coding public UI.
    - Define the niche-specific design direction, image/art direction, typography/spacing rhythm, CTA hierarchy, and mobile-first layout approach.
+   - Decide whether imagery will be real/licensed, generated, illustrated/vector/code-native, or omitted; document the asset plan and truth constraints.
    - Reject template-looking or AI-default patterns before implementation.
 
 5. **Astro Build**
@@ -185,12 +201,14 @@ New public-facing rank-and-rent sites must use the `impeccable` design skill/gui
    - Implement real content, forms/CTAs, metadata, schema, sitemap, and legal pages.
    - Keep owned-site interlinks and agency-network links out of launch pages.
    - Carry the `impeccable` design direction through components, spacing, imagery, contrast, and responsive states.
+   - If generated images are used, save accepted project-bound assets into the site workspace and record image path, generation skill/tool, prompt or source summary, and QC status.
 
 6. **Verification**
    - Start dev server before frontend edits.
    - Use browser automation to screenshot 375px, 768px, and 1440px.
    - Check console and failed network requests.
    - Run accessibility checks, including axe where possible.
+   - If generated images are used, visually inspect saved outputs before acceptance, reject AI-looking or physically implausible images, and verify the accepted assets in the actual browser page at mobile/tablet/desktop.
    - Verify the frontend design standard: distinctive niche fit, strong typography/spacing, domain-relevant imagery, accessible contrast, deliberate CTA hierarchy, and no template/AI-default patterns.
    - Check realistic long site names, phone numbers, service names, location strings, and nearby-area names at each viewport.
    - Run production build and verify production rendering.
@@ -217,6 +235,7 @@ Do not call a site complete until:
 - `impeccable` frontend design guidance has been applied during shaping, implementation, and polish.
 - Visual direction is niche-specific, production-grade, and not a generic local-service template.
 - Typography, spacing, imagery, accessible contrast, mobile-first layout, and CTA hierarchy are verified.
+- Any generated images have passed visual QC, are saved inside the site workspace, are documented with path/tool/prompt/QC status, and do not look AI-generated or misleading.
 - Realistic long site names, phone numbers, service names, location strings, and nearby-area names have been tested at 375px, 768px, and 1440px.
 - Post-launch GSC doorstep keyword loop is documented.
 - Dev and production builds pass.

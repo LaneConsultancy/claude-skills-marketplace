@@ -27,9 +27,10 @@ Required workflow:
 6. Create `spec/serp-competitors.md`, `spec/backlink-opportunities.csv`, `spec/keyword-map.md`, `spec/content-plan.md`, and `spec/lead-routing.md`.
 7. Keep matrix mode off unless SERP, volume, and unique-content evidence justify service x location expansion.
 8. Apply `impeccable` frontend design guidance: choose a niche-specific visual direction, avoid template/AI-default patterns, and verify typography, spacing, imagery, contrast, mobile layout, CTA hierarchy, and realistic long strings.
-9. Build the Astro site with real launch copy, metadata, truthful schema, sitemap, contact page, privacy policy, and terms.
-10. Document lead qualification, speed-to-lead, agreement-before-release status, intro offer status, and post-launch GSC position 7-33 doorstep keyword loop.
-11. Verify dev and production builds at 375px, 768px, and 1440px with browser screenshots, console/network checks, accessibility checks, and the frontend design standard.
+9. If generated raster imagery is needed, use `imagegen` and/or `generate-image` according to active runtime/tool availability and each skill's own workflow. Prompt for domain-relevant, production-grade assets with no AI-looking artifacts, no garbled text/logos, realistic physical details, truthful local context, and no fake staff/operators/proof. Visually inspect saved outputs with `view_image` or equivalent, reject/regenerate anything fake-looking or physically implausible, save accepted project-bound files into the site workspace, and document path, tool, prompt/source, and QC status in `spec/build-state.md` or an image asset note. If QC fails after reasonable attempts, use licensed stock, real photography, simpler illustration/vector/code-native assets, or no image instead.
+10. Build the Astro site with real launch copy, metadata, truthful schema, sitemap, contact page, privacy policy, and terms.
+11. Document lead qualification, speed-to-lead, agreement-before-release status, intro offer status, image asset/QC status where relevant, and post-launch GSC position 7-33 doorstep keyword loop.
+12. Verify dev and production builds at 375px, 768px, and 1440px with browser screenshots, console/network checks, accessibility checks, generated-image browser checks where relevant, and the frontend design standard.
 
 Do not fabricate NAP, GBP, reviews, accreditations, addresses, business history, named technicians, staff, operators, clinicians, tradespeople, specialists, or providers. Do not use review schema unless reviews are real. Do not use LocalBusiness schema unless truthful publishable NAP/contact details exist. Do not interlink owned rank-and-rent sites or link them to the agency/main domain as a network footprint.
 ```

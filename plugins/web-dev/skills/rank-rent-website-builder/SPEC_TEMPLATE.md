@@ -80,6 +80,17 @@ Routine intent:
 Trust language:
 FAQs:
 
+## Image Assets and QC
+
+Asset plan:
+Generated imagery used:
+Generation skill/tool:
+Final image paths:
+Prompt/source summary:
+QC status:
+Rejected variants/issues:
+Fallback plan if generated images fail QC:
+
 ## Schema and Truth Status
 
 NAP/GBP status:
