@@ -1,0 +1,33 @@
+
+  ┌──────────────────────────────────┐
+  │              unslop              │
+  └──────────────────────────────────┘
+
+› Domain:      local boiler and heating engineer website copy (UK home-services tradesperson: homepage, service pages, about, contact)
+› Type:        text
+› Samples:     30
+› Concurrency: 5
+› Timeout:     600s
+› Analysis:    1800s timeout
+› Model:       sonnet
+› Effort:      low
+› Output:      /Users/georgelane/.agents/skills/unslop/repo/unslop-output
+
+────────────────────────────────────────────────────────────────────
+   STEP 1/5  Generate prompts
+────────────────────────────────────────────────────────────────────
+
+  ◌ Asking Claude for a prompt set
+  ✓ Prompt set ready (00:24)
+  › Generated 30 prompts → prompts.json
+
+────────────────────────────────────────────────────────────────────
+   STEP 2/5  Run 30 samples through Claude Code
+────────────────────────────────────────────────────────────────────
+
+  [#-----------------------------]  1/30 sample 3   OK 00:08
+  [##----------------------------]  2/30 sample 6   OK 00:19
+  [###---------------------------]  3/30 sample 1   OK 00:28
+  [####--------------------------]  4/30 sample 5   OK 00:41
+  [#####-------------------------]  5/30 sample 8   OK 00:53
+  [######------------------------]  6/30 sample 9   OK 00:59
