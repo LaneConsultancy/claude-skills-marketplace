@@ -7,7 +7,7 @@ description: Plan site architecture for local service businesses to rank for "se
 
 Plan website structures that rank for "service + location" keyword combinations while avoiding thin content and doorway page penalties.
 
-Source of truth: `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md` (Whitespark 2026, Sterling Sky, Dec 2025 core update). Read it for the evidence behind these rules.
+Source of truth: `references/local-seo-playbook-2026.md` in this skill (Whitespark 2026, Sterling Sky, Dec 2025 core update). Read it for the evidence behind these rules. A shared copy also lives at `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md` on the local machine.
 
 ## Core Principle
 
