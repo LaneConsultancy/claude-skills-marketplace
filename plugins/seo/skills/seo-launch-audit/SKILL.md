@@ -209,6 +209,15 @@ If no sitemap is found: emit WARN, and fall back to crawling homepage `<a href>`
 
 5. **Favicon:** request `/favicon.ico` (or the URL declared in homepage `<link rel="icon">`). 4xx → WARN.
 
+6. **IndexNow key file:** the key filename is a UUID chosen by whoever enabled IndexNow, so it can't be guessed directly. Check for indirect evidence instead:
+   ```bash
+   curl -sSL https://<domain>/ | grep -i indexnow
+   curl -sSL https://<domain>/robots.txt | grep -i indexnow
+   ```
+   No hit on either → WARN. This is a "best effort" check, not a guarantee of absence: a site can have IndexNow enabled (e.g. via Cloudflare's IndexNow toggle) without any of these traces. Note the limitation in the report.
+
+7. **Bing Places claim:** cannot be checked via HTTP at all. Word this as a manual confirmation item in the report rather than an automated check. Ask the user to confirm the business is claimed on Bing Places (bing.com/places). Unconfirmed → WARN. Matters because ChatGPT's live web search runs on Bing's index, so a site optimised only for Google is invisible to it. See `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md` (Part 6) for background.
+
 ### Step 7. Classify every finding
 
 **FAIL — launch blockers (site is broken or invisible):**
@@ -239,6 +248,8 @@ If no sitemap is found: emit WARN, and fall back to crawling homepage `<a href>`
 | hreflang | Invalid language codes, missing return tags, or self-reference missing (multilingual sites only) |
 | Sitemap in robots.txt | Sitemap exists but not referenced in robots.txt |
 | robots.txt | 404 (not strictly required but recommended) |
+| IndexNow | No evidence of an IndexNow key file or integration found (e.g. Cloudflare's IndexNow toggle) |
+| Bing Places | Business not confirmed as claimed on Bing Places (manual confirmation item, cannot be checked via HTTP) |
 
 **PASS** — check ran and no issue found.
 

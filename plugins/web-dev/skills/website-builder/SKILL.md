@@ -7,6 +7,8 @@ description: "Build a complete website for a local business with mandatory quali
 
 **You are a coordinator. You do NOT write code yourself. You orchestrate agents and enforce quality gates.**
 
+**Local SEO source of truth:** `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md` (Whitespark 2026, Sterling Sky, December 2025 core update). The location/matrix page strategy, schema, GBP link, and launch rules in this skill follow that playbook. Read it for the evidence behind these rules.
+
 ## DEFAULT MODEL
 
 **This skill runs on Sonnet.** Before invoking `/website-builder`, switch to Sonnet with `/model sonnet` if not already active.
@@ -97,7 +99,8 @@ If no spec exists, interview the user using `AskUserQuestion` in 5 grouped round
 **Round 3 - Services & Locations:**
 - List of services offered
 - List of locations/areas served
-- Whether to build matrix pages (service × location combinations) — default: yes if 2+ services AND 2+ locations
+- **Proof per location:** for EACH town, does the client have real evidence there (reviews from that town, jobs completed there, original photos of that work)? Capture which towns qualify. This decides which towns earn their own page.
+- Page strategy. **Default is PROOF-GATED, not a full grid:** one pillar page per service (always); a location page ONLY for towns the client can evidence with reviews/jobs/photos, capped at 3-6 for most trades; matrix (service × location) pages ONLY for proof-backed combinations. Every other town served is named on a single "Areas We Cover" page. Templated full matrices now actively harm rankings (doorway-page filtering, Dec 2025 core update).
 
 **Round 4 - Design & Tech:**
 - Design mood/tone — free text with examples to spark ideas:
@@ -110,7 +113,9 @@ If no spec exists, interview the user using `AskUserQuestion` in 5 grouped round
 
 **Round 5 - Content & Features:**
 - Competitor URLs (for research — optional but recommended)
-- Testimonials (real ones, or "generate placeholders")
+- Testimonials. REAL ones strongly preferred (named town, named job). Generated placeholders are permitted for the build ONLY and MUST be flagged as launch blockers for the client to replace before go-live.
+- Original photos. REAL photos of the client's work, van, team, or premises are strongly preferred over stock or generated images (stock/AI imagery is a negative E-E-A-T signal; Google strips EXIF so geotagging does nothing). Generated placeholders are permitted for the build ONLY and MUST be flagged as launch blockers to replace.
+- E-E-A-T details for the per-page block: who is the named person with a real credential (e.g. Gas Safe registration number) to feature on service/location pages?
 - Accreditations/certifications
 - Special features — default: contact form + Google Maps embed
 
@@ -436,15 +441,17 @@ REQUIREMENTS:
 - Use the business's voice and USPs from the brief
 - Write compelling CTAs
 - Include local references for location pages
+- E-E-A-T BLOCK on every service and location page: a named person with a real credential (e.g. Gas Safe registration number), reference to an original photo of real work, and a specific testimonial (named town, named job). Content must read as written from experience, not from a keyword brief. Where the client has not supplied a real testimonial or photo, use a clearly marked placeholder and note it as a launch blocker to replace.
 
 OUTPUT:
 Create /spec/content/ folder with:
 - homepage.md
 - about.md
 - contact.md
-- services/[service-slug].md (one per service)
-- locations/[location-slug].md (one per location)
-- matrix/[location]-[service].md (ALL combinations - see Matrix Page Guide)
+- services/[service-slug].md (one per service, ALWAYS)
+- locations/[location-slug].md (ONLY for proof-backed towns, capped at 3-6; see Matrix Page Guide)
+- matrix/[location]-[service].md (ONLY for proof-backed combinations, NOT a full grid; see Matrix Page Guide)
+- areas-we-cover.md (single page naming every other town served, not given its own URL)
 
 Each file should contain:
 - Meta title
@@ -453,12 +460,13 @@ Each file should contain:
 - Full page content with H2/H3 structure
 - CTA text
 
-MATRIX PAGE CONTENT (CRITICAL):
-- Create content for ALL service × location combinations
-- Each matrix page MUST have unique opening paragraph with local context
-- At least 300 words per page must be unique to that specific combination
+LOCATION & MATRIX PAGE CONTENT (CRITICAL, PROOF-GATED):
+- Build location and matrix pages ONLY for towns/combinations with real proof (reviews, jobs, photos) recorded in the brief's proof-per-location fields. Do NOT generate a full service × location grid; templated matrices now harm rankings.
+- Each location/matrix page MUST pass the removed-city-name test: swap the town name out and it must NO LONGER read fine. Aim for roughly 50% genuinely locally-unique content.
+- Each page MUST have a unique opening paragraph with genuine local context
+- At least 300 words per page must be unique to that specific place/combination
 - Follow the Matrix Page Template Structure (see Matrix Page Guide below)
-- Do NOT copy-paste between matrix pages - each must be genuinely unique
+- Do NOT copy-paste between pages - each must be genuinely unique
 ```
 
 **GATE 2A (CONTENT QUALITY CHECK)**:
@@ -474,20 +482,24 @@ For each content file, check:
 [ ] Has compelling CTA
 [ ] No placeholder text ("Lorem ipsum", "[INSERT]", "TODO")
 
-MATRIX PAGE VERIFICATION (if applicable):
-[ ] ALL service × location combinations have content files
-[ ] Spot-check 3+ matrix pages for uniqueness
-[ ] Opening paragraphs are DIFFERENT between matrix pages
-[ ] Meta descriptions are UNIQUE per matrix page
+LOCATION & MATRIX PAGE VERIFICATION (if applicable):
+[ ] ONLY proof-backed towns/combinations have content files (no full grid; unproven areas live on areas-we-cover.md instead)
+[ ] Location pages capped at 3-6 for most trades
+[ ] Spot-check 3+ location/matrix pages for uniqueness
+[ ] Each passes the removed-city-name test (roughly 50% locally-unique content)
+[ ] Opening paragraphs are DIFFERENT between pages
+[ ] Meta descriptions are UNIQUE per page
 [ ] Local context is genuine (not generic "We serve [location]")
 ```
 
 **If ANY content file fails this check, re-spawn the copywriter agent to fix the failing content. Re-run this gate. Proceed only when all checks pass.**
-**If matrix pages are duplicative or templated, this is a CRITICAL failure — re-spawn copywriter with specific instructions to make each page unique.**
+**If location/matrix pages are duplicative, templated, or built as a full grid without proof, this is a CRITICAL failure. Re-spawn copywriter with specific instructions to make each page proof-backed and genuinely unique.**
 
 #### Track B: Image Generation (runs in PARALLEL with Track A)
 
 **Images are generated from the brief and research — NOT from content files (which are still being written).**
+
+**REAL photos are strongly preferred over generated ones.** Original photography of the client's actual work, van, team, and premises is an E-E-A-T signal; stock and AI-generated imagery is a negative signal a quality rater (and increasingly the algorithm) can spot. Generated images are permitted for the build ONLY as placeholders and MUST be flagged in the image manifest as launch blockers for the client to replace with real photos before go-live. Do not waste effort geotagging; Google strips EXIF on upload.
 
 ##### Step 2B.1: Plan Image Requirements
 Review the brief and research output to identify required images:
@@ -539,6 +551,7 @@ Create /spec/image-manifest.md listing all generated images with:
 - Purpose
 - Dimensions
 - Alt text recommendation
+- Launch-blocker flag: mark every AI-generated/placeholder image as "REPLACE WITH REAL PHOTO before launch" so the client knows which images are placeholders
 ```
 
 **GATE 2B**: Verify images exist and are appropriate:
@@ -590,11 +603,11 @@ For each required image:
    - If quality check returns NOT READY or NEEDS WORK with Critical issues: spawn coder agent(s) to fix the issues, then re-run quality-check. When it passes, update `/spec/build-state.md` and immediately begin Phase 5.
 
 ### Phase 5: Additional Pages (Location/Service/Matrix) - WITH REAL CONTENT
-1. Spawn coder agent(s) for remaining pages including ALL matrix combinations
+1. Spawn coder agent(s) for remaining pages: service pillars, the proof-backed location/matrix pages, and the "Areas We Cover" page
 2. **CRITICAL**: Coders MUST use content from `/spec/content/` for EVERY page
 3. **CRITICAL**: Service and location pages must NOT be walls of text — use cards, grids, icons, alternating layouts
 4. Coders MUST follow `/spec/design-concept.md` and use `/taste-skill` (technical guardrails), `/output-skill`, `/unslop-react-design`
-5. **MATRIX PAGES**: Build ALL service × location combinations (see Matrix Page Guide below)
+5. **LOCATION & MATRIX PAGES**: Build ONLY the proof-backed pages defined in the brief and `/spec/content/`, NOT a full service × location grid (see Matrix Page Guide below)
 4. **GATE 5**: After coders complete:
    - Spawn quality-check agent
    - Quality check MUST test representative pages from EACH template type
@@ -617,11 +630,23 @@ For each required image:
 ### Phase 7: SEO Implementation & Final Touches
 1. Spawn `seo-onpage` agent to implement:
    - Meta tags from `/spec/content/` files
-   - Structured data (LocalBusiness, Service, etc.)
+   - **Structured data (schema), following the playbook:**
+     - `LocalBusiness` with the SPECIFIC subtype (e.g. Plumber, HVACBusiness, Electrician) on the homepage and location pages, NOT the generic `LocalBusiness` type
+     - NAP in schema character-identical to the Google Business Profile
+     - `sameAs` array on the homepage listing the GBP, social profiles, and key directory listings (this tells Google these profiles are the same entity)
+     - `Service` schema on service pages
+     - `FAQPage` schema ONLY where there are genuine FAQs on the page
+     - `Review`/`AggregateRating` ONLY where reviews are legitimately displayed on the page
    - Sitemap generation
    - Internal linking optimization
-2. **GATE 7**:
+2. **Launch SEO steps (from the local SEO playbook):**
+   - **GBP website link:** set (or document for the client to set) the Google Business Profile website link to a STRONG service or location page, NOT the homepage if the homepage already ranks organically for the money terms (Sterling Sky Diversity Update: a URL in the local pack can be suppressed from page-one organic). UTM-tag that link so GBP traffic is measurable in analytics.
+   - **Bing Places:** claim and complete the listing (ChatGPT local search runs on Bing's index).
+   - **IndexNow:** enable it (a toggle on Cloudflare) so Bing indexes page changes immediately.
+3. **GATE 7**:
    - Verify all meta titles/descriptions are implemented (not defaults)
+   - Verify schema uses the specific `LocalBusiness` subtype, NAP matches the GBP character for character, and the homepage carries a `sameAs` array
+   - Verify the GBP link target (strong non-homepage page + UTM), Bing Places, and IndexNow are done or documented for the client
    - Quick visual check that nothing broke
    - When verified, update `/spec/build-state.md` and immediately begin Phase 8.
 
@@ -632,29 +657,35 @@ For each required image:
 4. **GATE 8**:
    - Take screenshots of PRODUCTION build
    - Compare to dev screenshots
-   - If different: spawn coder agent to investigate and fix, re-build, re-check. When production matches dev, update `/spec/build-state.md` and immediately begin Phase 9.
+   - **Core Web Vitals pass criteria (from the playbook): LCP < 2.5s, INP < 300ms, measured at the 75th percentile (p75) in field data.** Lab checks (Lighthouse / PageSpeed Insights) are a proxy during the build; the client confirms against p75 field data once the site has traffic.
+   - If production differs from dev OR the CWV targets are missed: spawn coder agent to investigate and fix, re-build, re-check. When production matches dev AND the CWV targets are met, update `/spec/build-state.md` and immediately begin Phase 9.
 
 ---
 
 ## Matrix Page Guide (Service × Location Pages)
 
-Matrix pages target "[Service] in [Location]" searches (e.g., "Boiler Repair in Greenhithe"). Build ALL combinations of services × locations.
+Matrix pages target "[Service] in [Location]" searches (e.g., "Boiler Repair in Greenhithe"). **They are PROOF-GATED, not built as a full grid.**
 
-### Calculating Matrix Pages
+### The Proof-Gated Rule (READ THIS FIRST)
 
-```
-Total matrix pages = (number of services) × (number of locations)
+Post-December 2025 core update, templated full matrices actively HARM rankings (doorway-page filtering; sitewide quality assessment under the helpful content system, now baked into core ranking). The old "build every service × location combination" approach now loses traffic. The 2026 rule:
 
-Example:
-- 5 services × 10 locations = 50 matrix pages
-- 8 services × 15 locations = 120 matrix pages
-```
+- **One pillar page per service, always.** This is the #1 local organic ranking factor.
+- **Location pages ONLY for towns the client can evidence** with real reviews, jobs done, and original photos. **Cap at 3-6 for most trades**, not 15+. Two or three strong, evidenced city pages outperform fifteen templated ones, and the fifteen can now actively hurt you.
+- **Matrix (service × location) pages ONLY for combinations with real proof:** jobs done there, reviews from there, photos from there, for that specific service. The default is NOT to build these; each one must earn its existence.
+- **Everything else** is named on a single "Areas We Cover" page, not given its own URL.
+
+Which towns and combinations qualify comes from the proof gathered at intake (Round 3) and recorded in the brief's proof-per-location fields. If a town has no proof, it does not get a page.
+
+### The Removed-City-Name Test
+
+Take the town name out of the page. Is it still obviously about that specific place? If you can swap the town name for another and the page still reads fine, it FAILS: it's a doorway page regardless of intent. **Aim for roughly 50% genuinely locally-unique content per location/matrix page** (BrightLocal benchmark).
 
 ### URL Structure
 
 ```
 /[location]/[service]/
-Examples:
+Examples (only where proof exists for that combination):
 - /greenhithe/boiler-repair/
 - /dartford/gas-safety-certificates/
 - /bexley/central-heating-installation/
@@ -752,8 +783,9 @@ Example links on /greenhithe/boiler-repair/:
 
 When quality-checking matrix pages, verify:
 ```
-[ ] ALL service × location combinations exist
+[ ] ONLY proof-backed combinations exist (no full grid; unproven areas are on the "Areas We Cover" page instead)
 [ ] Each page has unique H1 with service AND location
+[ ] Each page passes the removed-city-name test (roughly 50% locally-unique content)
 [ ] Opening paragraphs are NOT identical across pages
 [ ] Meta descriptions are unique per page
 [ ] Local content is genuinely local (not generic)
@@ -762,7 +794,7 @@ When quality-checking matrix pages, verify:
 [ ] No "thin content" warnings from SEO perspective
 ```
 
-**If matrix pages look templated/identical, this is a CRITICAL failure. Fix before proceeding.**
+**If matrix pages look templated/identical, or a full grid was built without proof, this is a CRITICAL failure. Fix before proceeding.**
 
 ---
 

@@ -39,6 +39,21 @@ You have two options for providing your website specification:
 
 ---
 
+## Entity Consistency
+
+**One source of truth the whole build, GBP, schema, and directories MUST match, character for character.** Google cross-checks these sources to validate the business as a single entity; inconsistency is a demotion signal. (Same fields as /website-builder so the full build inherits them.)
+
+**Canonical Business Name:** [Exact legal/trading name, character for character. E.g., Watermark Plumbing]
+**NAP (Name, Address, Phone):**
+- Name: [must match Canonical Business Name exactly]
+- Address: [exact format used on the GBP]
+- Phone: [exact format used on the GBP]
+**Canonical Services Terminology:** [The exact service names/descriptions to use everywhere: site, GBP services list, schema, directories]
+**GBP Website Link Target:** [The STRONG service or location page the Google Business Profile links to, NOT the homepage if the homepage already ranks organically (Sterling Sky Diversity Update). E.g., /services/boiler-repairs/]
+**GBP Link UTM Parameters:** [UTM string appended to the GBP link so its traffic is measurable. E.g., ?utm_source=google&utm_medium=organic&utm_campaign=gbp]
+
+---
+
 ## Tech Stack
 
 **Framework:** [Next.js 14 / Astro / etc.]
@@ -74,9 +89,9 @@ You have two options for providing your website specification:
 **Logo:** [Path to logo file or "to be provided"]
 
 **Images:**
-- [ ] Client will provide images
-- [ ] Use stock images
-- [ ] Generate placeholder images
+- [ ] Client will provide REAL photos (strongly preferred; original work/van/team/premises is an E-E-A-T signal)
+- [ ] Use stock images (negative E-E-A-T signal; avoid where possible)
+- [ ] Generate placeholder images (demo/build ONLY; MUST be flagged as launch blockers to replace with real photos before go-live)
 
 ---
 
@@ -98,13 +113,22 @@ List ALL services the business provides (full list for brief compatibility):
 
 ## Locations Served
 
-List ALL locations/areas the business covers (full list for brief compatibility):
+List ALL locations/areas the business covers (full list for brief compatibility). Coverage alone does NOT earn a page; proof does.
 
 1. [Location 1 - e.g., Basildon]
 2. [Location 2 - e.g., Billericay]
 3. [Location 3 - e.g., Brentwood]
 
 [Add more as needed]
+
+### Proof Per Location
+
+**This table decides which towns get their own page in the full build.** A town earns a location page ONLY if it has real proof (reviews from there, jobs done there, original photos of that work). Cap primary location pages at 3-6 for most trades. Towns with no proof are named on the single "Areas We Cover" page. Captured at demo intake so /website-builder inherits it.
+
+| Location | Reviews (from this town) | Jobs Completed (here) | Photos (of real work here) | Qualifies for own page? |
+|----------|--------------------------|------------------------|-----------------------------|--------------------------|
+| [Location 1] | [e.g., 4 Google reviews] | [e.g., 30+ boiler jobs] | [e.g., 6 job photos] | [Yes / No] |
+| [Location 2] | [none yet] | [1-2 jobs] | [none] | [No, Areas We Cover] |
 
 ---
 
@@ -126,29 +150,45 @@ List ALL locations/areas the business covers (full list for brief compatibility)
 | [Service 1] | /services/[slug] | Description, benefits, process, CTA |
 | [Service 2] | /services/[slug] | Description, benefits, process, CTA |
 
-### Location Pages
+### Location Pages (PROOF-BACKED ONLY, cap 3-6)
 
-| Location | URL | Key Content |
-|----------|-----|-------------|
-| [Location 1] | /[location] | Local info, services in area, CTA |
-| [Location 2] | /[location] | Local info, services in area, CTA |
+Full build: only towns that qualify in the Proof Per Location table above. Every other town served goes on the single "Areas We Cover" page.
 
-### Matrix Pages (Service + Location) -- FULL BUILD ONLY
+| Location | URL | Proof (why it earns a page) | Key Content |
+|----------|-----|------------------------------|-------------|
+| [Location 1] | /[location] | [reviews/jobs/photos evidence] | Local info, services in area, CTA |
 
-| Combination | URL | Purpose |
-|-------------|-----|---------|
-| [Service] in [Location] | /[location]/[service] | Local SEO targeting |
+### Matrix Pages (Service + Location) -- FULL BUILD ONLY, PROOF-BACKED COMBINATIONS ONLY
 
-**Total Page Count:** [Calculate: core + services + locations + matrix]
+Do NOT build a full service × location grid; templated matrices now harm rankings (doorway-page filtering, Dec 2025 core update). Build a matrix page ONLY where there is real proof for that specific service in that specific town. Each must pass the removed-city-name test (roughly 50% locally-unique content).
+
+| Combination | URL | Proof (why it earns a page) |
+|-------------|-----|------------------------------|
+| [Service] in [Location] | /[location]/[service] | [jobs/reviews/photos for this exact combo] |
+
+### Areas We Cover Page
+
+| Page | URL | Purpose |
+|------|-----|---------|
+| Areas We Cover | /areas-we-cover | Names every other town served (no proof yet) without giving each its own URL |
+
+**Total Page Count:** [Calculate: core + services + proof-backed locations + proof-backed matrix + Areas We Cover. NOT services × locations]
 
 ---
 
 ## Content Requirements
 
 ### Testimonials
-- [ ] Client will provide real testimonials
-- [ ] Use placeholder testimonials (mark for replacement)
+- [ ] Client will provide REAL testimonials (strongly preferred; named town, named job)
+- [ ] Use placeholder testimonials (demo/build ONLY; MUST be flagged as launch blockers for the client to replace before go-live)
 - Number needed: [e.g., 3-5]
+
+### E-E-A-T Block (required per service and location page in the full build)
+
+Post-December 2025 core update, this applies to competitive local queries, not just YMYL:
+- **Named person + credential:** [e.g., Mark Green, Gas Safe reg. 123456, visible and linked]
+- **Original photo:** [real job/van/premises photo, never stock]
+- **Specific testimonial:** [named town, named job]
 
 ### Trust Signals
 - [ ] Accreditations/certifications to display: [list them]
@@ -194,7 +234,15 @@ List ALL locations/areas the business covers (full list for brief compatibility)
 
 **Local SEO:**
 - Google Business Profile: [URL if exists]
+- GBP website link target + UTM: [see Entity Consistency block; strong non-homepage page, UTM-tagged]
+- Bing Places: [claimed? ChatGPT local search runs on Bing's index]
+- IndexNow: [enabled on Cloudflare? toggle so Bing indexes changes immediately]
 - Target areas: [List main areas]
+
+**Schema (structured data):**
+- LocalBusiness subtype: [specific type, e.g. Plumber / HVACBusiness / Electrician, not generic LocalBusiness]
+- NAP in schema must match the GBP character for character (see Entity Consistency block)
+- sameAs array on homepage: [GBP, socials, key directory listings]
 
 **Meta Information:**
 - Default title format: [e.g., "Page Name | Business Name"]
@@ -232,9 +280,11 @@ List ALL locations/areas the business covers (full list for brief compatibility)
 - Matrix pages: NONE (full build only)
 
 ### Pages Deferred to Full Build
-- Service pages: [remaining services not in demo...]
-- Location pages: [remaining locations not in demo...]
-- ALL matrix pages ([N services] x [M locations] = [total] pages)
+- Service pages: [remaining services not in demo; one pillar page each]
+- Location pages: [proof-backed towns not in demo, capped at 3-6 total]
+- Proof-backed matrix pages: [only service+location combos with real jobs/reviews/photos, NOT a full grid]
+- "Areas We Cover" page: [names every other town served without its own URL]
+- Entity/GBP/schema work: entity consistency sheet, specific-subtype LocalBusiness schema with sameAs, GBP link + UTM, Bing Places + IndexNow
 - Blog/news section (if applicable)
 
 ### Handoff Notes

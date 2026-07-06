@@ -126,8 +126,8 @@ Step 3: Run the full website builder
 The full builder will:
 - Detect `/spec/brief.md` and skip the interview
 - Reuse existing content and images
-- Build remaining service/location pages
-- Build ALL matrix pages (service x location combinations)
+- Build a pillar page per service, proof-backed location pages (evidenced towns only, capped at 3-6), and matrix pages only for proof-backed combos (NOT a templated grid)
+- Add entity consistency, specific-subtype LocalBusiness schema with sameAs, and the GBP link/Bing Places/IndexNow launch steps
 - Full SEO implementation
 - Exhaustive quality gates
 

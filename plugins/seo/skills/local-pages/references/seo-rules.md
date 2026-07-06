@@ -187,18 +187,30 @@ Name, Address, Phone must be:
 
 ### LocalBusiness Schema (Required)
 
+Use the specific subtype schema.org defines, not the generic `LocalBusiness` type: `Plumber`, `Electrician`, `HVACBusiness`, `RoofingContractor`, and so on. Fall back to `LocalBusiness` only when no closer subtype exists.
+
+NAP in the schema (name, address, phone) must match the Google Business Profile character for character. A mismatch is a demotion signal: Google cross-checks these sources to verify the entity.
+
 ```json
 {
-  "@type": "LocalBusiness",
+  "@type": "Plumber",
   "name": "Business Name",
   "telephone": "+44...",
   "address": {...},
   "geo": {...},
   "openingHours": "...",
   "priceRange": "££",
-  "areaServed": [...]
+  "areaServed": [...],
+  "sameAs": [
+    "https://www.google.com/maps/place/...",
+    "https://www.facebook.com/businessname",
+    "https://www.checkatrade.com/...",
+    "https://www.yell.com/..."
+  ]
 }
 ```
+
+`sameAs` should list the GBP listing, key social profiles, and the directory listings that matter for the niche. This is how you explicitly tell Google these profiles are all the same entity.
 
 ### FAQ Schema (For FAQ Sections)
 

@@ -23,6 +23,8 @@ allowed-tools:
 
 # Local SEO Analysis (March 2026)
 
+Source of truth for ranking weights, GBP factors, review and citation guidance: `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md` (Whitespark 2026, Sterling Sky controlled testing, December 2025 core update).
+
 ## Key Statistics
 
 | Metric | Value | Source |
@@ -94,7 +96,7 @@ Primary category is the **single most important local pack factor** (Whitespark 
 - Photos/video evidence (45% more direction requests with photos, Agency Jet)
 - Q&A content (deprecated Dec 2025, replaced by Ask Maps Gemini AI -- recommend recreating Q&A content as FAQ sections on website; GBP removed existing Q&A with no export available)
 - Google Verified badge eligibility (replaced Guaranteed/Screened in Oct 2025)
-- GBP link URL strategy: do NOT link to strongest website page (Sterling Sky Diversity Update -- risks suppressing organic rankings)
+- GBP link URL strategy (Sterling Sky Diversity Update): link the GBP to a strong service or location page rather than a homepage that already ranks organically for money terms -- a URL ranking in the local pack can be suppressed from page-one organic. UTM-tag the link so the effect is measurable in analytics.
 - Business hours visibility on page (businesses open at search time rank higher, factor #5)
 
 **Scoring guide:**
@@ -168,7 +170,7 @@ Citations declining for traditional pack rankings but **3 of top 5 AI visibility
   - BBB: `site:bbb.org "Business Name"`
   - Facebook business page references
 - Apple Business Connect awareness (usage doubled to 27%, BrightLocal 2026 -- recommend claiming)
-- Bing Places awareness (powers ChatGPT, Copilot, Alexa -- recommend claiming and optimizing)
+- Bing Places awareness (powers ChatGPT, Copilot, Alexa -- recommend claiming and optimizing). Also recommend enabling **IndexNow** (trivial on Cloudflare -- a toggle/API ping) so Bing indexes page changes immediately; businesses optimising only for Google are invisible to ChatGPT's local recommendations.
 - Industry-specific directory recommendations: load `references/local-schema-types.md` for per-vertical citation sources
 - Data aggregator awareness: Data Axle, Foursquare, Neustar/TransUnion (recommend submission for downstream distribution)
 
@@ -224,6 +226,21 @@ Links declining for local pack but remain **~26% of local organic ranking** (Whi
 - Full: Local authority signals visible (chamber, BBB, press), community involvement evident
 - Partial: Some authority signals but limited local link indicators
 - Low: No detectable local authority signals
+
+### 7. E-E-A-T Signals (quality overlay, post-December 2025)
+
+The December 2025 core update extended E-E-A-T expectations beyond YMYL into all competitive queries, including local services (~31% impact rate on local sites). Winners had staff profiles, original job photos, and specific testimonials; losers had generic "SEO-optimised" service pages. Score this as a quality overlay across the on-page and authority dimensions, not a separate weight.
+
+**Check for:**
+- Named people with real, visible, linked credentials (e.g. Gas Safe registration number, licence, years trading, photos of the actual team)
+- Original photography of real work, van, and premises -- **not stock** (a negative signal a human rater and increasingly the algorithm can spot)
+- Case studies and testimonials with specific local detail (the job, the problem, the fix, the town), not generic "Great service!"
+- Service content written from experience ("what we find when we service back boilers in older [town] properties"), not from a keyword brief
+
+**Scoring guide:**
+- Full: named credentialed people, original photography, specific local case studies/testimonials, experience-led copy
+- Partial: some signals present but stock imagery or generic testimonials remain
+- Low: anonymous, stock photos, generic keyword-brief content
 
 ---
 

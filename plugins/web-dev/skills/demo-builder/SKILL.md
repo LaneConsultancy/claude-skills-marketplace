@@ -52,7 +52,8 @@ If no spec exists, interview the user using `AskUserQuestion` in 5 grouped round
 **Round 3 - Services & Locations:**
 - List of ALL services offered (full list -- needed for brief compatibility with /website-builder)
 - List of ALL locations/areas served (full list)
-- **Demo selection**: "For the demo, I'll build 2-3 representative service pages and 2-3 location pages. Which services and locations are most important to showcase first?" (Default: first 2-3 of each list)
+- **Proof per location**: "For the full build, a town only earns its own page if there's real proof there. For EACH town, do you have reviews from there, jobs completed there, and original photos of that work?" Capture which towns qualify. This carries forward so /website-builder can build proof-backed location and matrix pages (not a templated grid).
+- **Demo selection**: "For the demo, I'll build 2-3 representative service pages and 2-3 location pages. Which services and locations are most important to showcase first?" (Default: prioritise the proof-backed towns; otherwise first 2-3 of each list)
 
 **Round 4 - Design & Tech:**
 - Design aesthetic -- present these options:
@@ -461,16 +462,18 @@ Run `/website-builder` in this project directory.
 
 It will:
 1. Detect the existing brief and skip the interview
-2. Extend content research to cover ALL pages
-3. Write content for remaining service + location pages
-4. Build ALL matrix pages (service x location combinations)
-5. Full SEO implementation with sitemap
-6. Comprehensive quality gates at every phase
+2. Extend content research to cover all planned pages
+3. Write a dedicated pillar page for every service (the #1 local organic ranking factor)
+4. Build proof-backed location pages (only towns with real reviews/jobs/photos, capped at 3-6) and matrix pages only for evidenced service+location combinations -- NOT a templated grid, which now harms rankings
+5. Entity, GBP, and schema work: one source of truth for name/NAP/services terminology; specific LocalBusiness subtype schema with sameAs; GBP website link pointed at a strong non-homepage page (UTM-tagged); Bing Places + IndexNow at launch
+6. Full SEO implementation with sitemap
+7. Comprehensive quality gates at every phase
 
 ### What the full build adds:
-- [remaining services] service pages
-- [remaining locations] location pages
-- [total] matrix pages for local SEO ([services] x [locations])
+- A dedicated pillar page for every remaining service
+- Proof-backed location pages (evidenced towns only, capped at 3-6) with an "Areas We Cover" page for the rest
+- Proof-backed service+location pages where real jobs/reviews/photos exist -- each passing the removed-city-name test
+- Entity consistency, specific-subtype LocalBusiness schema with sameAs, and the GBP link/Bing Places/IndexNow launch steps
 - Complete sitemap and internal linking
 - Extended SEO optimization
 - Exhaustive multi-phase quality gates

@@ -100,7 +100,7 @@ Optional when justified by SERP/content depth:
 - `/areas/[nearby-location]/` for nearby places with enough real search intent
 - `/faqs/` only if FAQ depth would otherwise bloat the homepage
 
-Avoid large service x location matrices for the first build unless research shows real demand and enough unique supportable content. Document any matrix decision in `spec/keyword-map.md` and `spec/content-plan.md`.
+Avoid large service x location matrices for the first build unless research shows real demand and enough unique supportable content. Cap primary location pages at 3-6, and gate every one on genuinely unique local content: it must pass the removed-city-name test (take the town name out; if the page isn't still obviously about that place, it's a doorway page) with roughly 50% of the content genuinely location-specific. Document any matrix decision in `spec/keyword-map.md` and `spec/content-plan.md`. See `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md` for the reasoning behind this cap.
 
 ## Content Standards
 
@@ -131,6 +131,7 @@ Default site setup:
   - `LocalBusiness` only when the lead-gen brand has truthful NAP/contact details to publish.
   - Review/testimonial schema only when the reviews/testimonials are real and attributable.
 - Add `sitemap.xml` support before launch.
+- Enable IndexNow before launch (trivial on Cloudflare: a toggle/API ping) so Bing indexes changes immediately.
 
 Required env template values per site:
 
@@ -211,6 +212,7 @@ When a rank-and-rent site needs generated raster imagery, the builder may invoke
    - If generated images are used, visually inspect saved outputs before acceptance, reject AI-looking or physically implausible images, and verify the accepted assets in the actual browser page at mobile/tablet/desktop.
    - Verify the frontend design standard: distinctive niche fit, strong typography/spacing, domain-relevant imagery, accessible contrast, deliberate CTA hierarchy, and no template/AI-default patterns.
    - Check realistic long site names, phone numbers, service names, location strings, and nearby-area names at each viewport.
+   - Verify Core Web Vitals pass criteria: LCP under 2.5s and INP under 300ms, both measured at the 75th percentile (PageSpeed Insights field data).
    - Run production build and verify production rendering.
 
 7. **Handoff**
@@ -224,7 +226,7 @@ Do not call a site complete until:
 - Primary keyword intent is clearly targeted.
 - Niche gate records microvertical, map-pack strength, volume/difficulty, average job value, and monetisation model.
 - Top competitor/backlink notes exist.
-- Matrix mode is either off or justified with SERP/volume/unique-content evidence.
+- Matrix mode is either off or justified with SERP/volume/unique-content evidence, with primary location pages capped at 3-6 and each one passing the removed-city-name test (~50% genuinely location-specific content).
 - No placeholder launch copy remains.
 - No fake NAP, GBP, reviews, accreditations, named providers, staff, LocalBusiness schema, or review schema.
 - No owned-site interlink/PBN-style footprint exists.
@@ -232,6 +234,8 @@ Do not call a site complete until:
 - Lead qualification fields and speed-to-lead target are documented.
 - Contractor/renter status, agreement-before-release status, and intro offer status are documented.
 - Metadata, schema, sitemap, privacy policy, and terms exist.
+- IndexNow is enabled.
+- Core Web Vitals pass criteria are met: LCP under 2.5s, INP under 300ms, at p75.
 - `impeccable` frontend design guidance has been applied during shaping, implementation, and polish.
 - Visual direction is niche-specific, production-grade, and not a generic local-service template.
 - Typography, spacing, imagery, accessible contrast, mobile-first layout, and CTA hierarchy are verified.

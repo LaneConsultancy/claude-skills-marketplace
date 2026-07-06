@@ -152,6 +152,16 @@ H2: Areas We Cover Near [Location]
 CTA section with contact details
 ```
 
+### E-E-A-T Block (Required Per Page)
+
+Post-December 2025, Google applies E-E-A-T expectations to competitive local queries, not just YMYL topics. Every service and location page must include a visible E-E-A-T block alongside the persuasive copy:
+
+- **A named person with a real, verifiable credential:** e.g. a Gas Safe registration number, displayed and linkable, not a vague "our qualified team"
+- **An original photo of real work completed in that area:** never stock imagery. Geotagging the photo does nothing: Google strips EXIF data on upload. The photo matters as E-E-A-T evidence, not as a coordinate signal
+- **A specific testimonial naming the town and the job:** "Sorted our burst pipe in Dartford within the hour" beats "Great service!"
+
+See `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md` for the full reasoning behind this requirement.
+
 ### Phase 4: Writing
 
 Apply copywriting principles from `references/copywriting-rules.md`:
@@ -166,7 +176,8 @@ Apply SEO integration from `references/seo-rules.md`:
 1. **Natural keyword usage** — Never stuff, always readable
 2. **Keyword-rich headings** — Include variations in H2/H3s
 3. **Local signals** — Geographic terms, local proof, contact info
-4. **Schema markup** — Recommend LocalBusiness, FAQ, Review schemas
+4. **Schema markup** — Recommend LocalBusiness (specific subtype), FAQ, Review schemas
+5. **Summarisable for AI:** Give the page extractable answers: prices or price ranges, hours, coverage areas, FAQs in conversational language. AI Overviews now appear on roughly 68% of local queries, and AI systems recommend businesses they can confidently summarise
 
 ### Phase 5: Quality Check
 
@@ -193,6 +204,7 @@ Before delivering, verify:
 **Indexability Checklist:**
 - [ ] Content offers something top 10 results don't
 - [ ] Page differs significantly from other pages on this site
+- [ ] Removed-city-name test passed: take the town name out of a location page; if it isn't still obviously about that place, it's a doorway page. Target roughly 50% genuinely location-specific content per location page
 - [ ] Language sounds natural (read aloud test passed)
 - [ ] Primary topic crystal clear in first paragraph
 - [ ] Search intent matches what's ranking for target keyword

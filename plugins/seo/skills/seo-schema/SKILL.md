@@ -39,15 +39,13 @@ allowed-tools:
 
 ## Schema Type Status (as of Feb 2026)
 
-Read `references/schema-types.md` for the full list. Key rules:
+Key rules:
 
 ### ACTIVE (recommend freely):
 Organization, LocalBusiness, SoftwareApplication, WebApplication, Product (with Certification markup as of April 2025), ProductGroup, Offer, Service, Article, BlogPosting, NewsArticle, Review, AggregateRating, BreadcrumbList, WebSite, WebPage, Person, ProfilePage, ContactPage, VideoObject, ImageObject, Event, JobPosting, Course, DiscussionForumPosting
 
 ### VIDEO & SPECIALIZED (recommend freely):
 BroadcastEvent, Clip, SeekToAction, SoftwareSourceCode
-
-See `schema/templates.json` for ready-to-use JSON-LD templates for these types.
 
 > **JSON-LD and JavaScript rendering:** Per Google's December 2025 JS SEO guidance, structured data injected via JavaScript may face delayed processing. For time-sensitive markup (especially Product, Offer), include JSON-LD in the initial server-rendered HTML.
 
@@ -97,26 +95,35 @@ When generating schema for a page:
 ```
 
 ### LocalBusiness
+
+Use the specific subtype where one exists (Plumber, HVACBusiness, Electrician, Restaurant, Dentist, etc.), not generic LocalBusiness. **NAP rule: name, address, and telephone must match the Google Business Profile character for character** — Google cross-references schema, site, GBP, and directories to validate the entity, and inconsistency is a demotion signal. The `sameAs` array is how you explicitly tell Google "these profiles are all the same entity": include the GBP listing, social profiles, and key directory listings. (Source: `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md`.)
+
 ```json
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "[Business Name]",
+  "@type": "[LocalBusiness subtype, e.g. Plumber]",
+  "name": "[Business Name — exactly as on GBP]",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "[Street]",
+    "streetAddress": "[Street — exactly as on GBP]",
     "addressLocality": "[City]",
-    "addressRegion": "[State]",
-    "postalCode": "[ZIP]",
-    "addressCountry": "US"
+    "addressRegion": "[State/County]",
+    "postalCode": "[Postcode]",
+    "addressCountry": "[Country]"
   },
-  "telephone": "[Phone]",
+  "telephone": "[Phone — exactly as on GBP]",
+  "url": "[Website URL]",
   "openingHours": "Mo-Fr 09:00-17:00",
   "geo": {
     "@type": "GeoCoordinates",
     "latitude": "[Lat]",
     "longitude": "[Long]"
-  }
+  },
+  "sameAs": [
+    "[Google Business Profile URL]",
+    "[Facebook URL]",
+    "[Key directory listing URLs, e.g. Checkatrade/Trustpilot/Yell]"
+  ]
 }
 ```
 
