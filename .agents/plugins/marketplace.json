@@ -1,0 +1,17 @@
+{
+  "name": "george-skills",
+  "interface": { "displayName": "George Skills" },
+  "plugins": [
+    { "name": "ads", "source": { "source": "local", "path": "./plugins/ads" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" },
+    { "name": "business-ops", "source": { "source": "local", "path": "./plugins/business-ops" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" },
+    { "name": "copywriting", "source": { "source": "local", "path": "./plugins/copywriting" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" },
+    { "name": "cro", "source": { "source": "local", "path": "./plugins/cro" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" },
+    { "name": "dev-workflow", "source": { "source": "local", "path": "./plugins/dev-workflow" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" },
+    { "name": "marketing-strategy", "source": { "source": "local", "path": "./plugins/marketing-strategy" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" },
+    { "name": "media", "source": { "source": "local", "path": "./plugins/media" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" },
+    { "name": "misc", "source": { "source": "local", "path": "./plugins/misc" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" },
+    { "name": "reference-docs", "source": { "source": "local", "path": "./plugins/reference-docs" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" },
+    { "name": "seo", "source": { "source": "local", "path": "./plugins/seo" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" },
+    { "name": "web-dev", "source": { "source": "local", "path": "./plugins/web-dev" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" }
+  ]
+}

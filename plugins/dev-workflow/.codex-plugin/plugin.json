@@ -1,0 +1,18 @@
+{
+  "name": "dev-workflow",
+  "version": "1.0.0",
+  "description": "Development workflow: TDD, debugging, planning, code review, git worktrees, security. (18 skills)",
+  "author": { "name": "George Lane", "email": "georgejlane@icloud.com", "url": "https://github.com/LaneConsultancy" },
+  "homepage": "https://github.com/LaneConsultancy/claude-skills-marketplace",
+  "repository": "https://github.com/LaneConsultancy/claude-skills-marketplace.git",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Dev Workflow",
+    "shortDescription": "Development workflow: TDD, debugging, planning, code review, git worktrees, security. (18 skills)",
+    "longDescription": "Development workflow: TDD, debugging, planning, code review, git worktrees, security. (18 skills)",
+    "developerName": "George Lane",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "Use the most relevant Dev Workflow skill for this task."
+  }
+}

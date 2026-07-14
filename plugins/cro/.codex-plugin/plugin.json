@@ -1,0 +1,18 @@
+{
+  "name": "cro",
+  "version": "1.0.0",
+  "description": "Conversion rate optimization: landing pages, forms, popups, signup/onboarding, A/B testing. (10 skills)",
+  "author": { "name": "George Lane", "email": "georgejlane@icloud.com", "url": "https://github.com/LaneConsultancy" },
+  "homepage": "https://github.com/LaneConsultancy/claude-skills-marketplace",
+  "repository": "https://github.com/LaneConsultancy/claude-skills-marketplace.git",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Cro",
+    "shortDescription": "Conversion rate optimization: landing pages, forms, popups, signup/onboarding, A/B testing. (10 skills)",
+    "longDescription": "Conversion rate optimization: landing pages, forms, popups, signup/onboarding, A/B testing. (10 skills)",
+    "developerName": "George Lane",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "Use the most relevant Cro skill for this task."
+  }
+}

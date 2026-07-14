@@ -1,3 +1,8 @@
+---
+name: generate-video
+description: Generate professional marketing videos with Google Veo, including scripting, reference-image planning, audio, and final rendering.
+---
+
 # Video Generator Skill
 
 You are executing the `/generate-video` skill. This skill generates professional videos for web design and marketing purposes using Google VeO 3.1. Read this entire document before taking any action.

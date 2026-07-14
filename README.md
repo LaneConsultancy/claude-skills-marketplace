@@ -1,43 +1,34 @@
-# george-skills
+# George Skills Marketplace
 
-A Claude plugin marketplace bundling George Lane's skill library — marketing, SEO, copywriting, CRO, paid ads, development workflow, media, and more. 122 skills across 10 themed plugins.
+Shared public marketplace for Claude and Codex. It currently contains **130 skills** in **11 plugins**.
 
-## Add this marketplace
+## Claude
 
-**Claude Code (CLI):**
-```
-/plugin marketplace add LaneConsultancy/claude-skills-marketplace
-/plugin install copywriting@george-skills
-```
+Add this repository as a personal marketplace. Claude Code cloud setup can clone the repository and copy the plugin skills into `~/.claude/skills`.
 
-**Claude web (claude.ai → Customize → Personal plugins):** add this repo as a plugin source.
+## Codex desktop / CLI
 
-## Plugins
+`codex plugin marketplace add LaneConsultancy/claude-skills-marketplace`
 
-| Plugin | Skills | Covers |
-|---|---|---|
-| `copywriting` | 20 | Sales copy, email, social, voice, editing, anti-slop |
-| `seo` | 19 | Audits, technical, schema, sitemaps, local, programmatic |
-| `dev-workflow` | 18 | TDD, debugging, planning, code review, git worktrees, security |
-| `marketing-strategy` | 16 | Offers, pricing, psychology, ICP, research, launches |
-| `ads` | 12 | Google/Meta/Facebook campaigns, ad copy, analytics |
-| `cro` | 10 | Landing pages, forms, popups, signup/onboarding, A/B |
-| `media` | 9 | Image/video/audio generation, screenshots, transcripts |
-| `web-dev` | 9 | Site builders, UI design, Playwright, deploys |
-| `business-ops` | 6 | GTD, X/Twitter, Retell AI, Cloudways, Namecheap |
-| `reference-docs` | 3 | Doc creation, PDF handling, OpenAI docs |
+The native Codex marketplace is at `.agents/plugins/marketplace.json`; the legacy Claude marketplace remains at `.claude-plugin/marketplace.json`.
 
-## Updating
+## Codex cloud environment
 
-Skills are maintained in `~/.claude/skills/`. After changing a skill, rebuild and push:
+Use this as both the environment **setup** and **maintenance** script so fresh and cached containers receive the latest skills and global rules:
 
-```
-bash ~/build-skills-marketplace.sh
-cd ~/claude-skills-marketplace && git add -A && git commit -m "update skills" && git push
+```bash
+set -euo pipefail
+tmp_dir="$(mktemp -d)"
+git clone --depth 1 https://github.com/LaneConsultancy/claude-skills-marketplace.git "$tmp_dir/skills-marketplace"
+bash "$tmp_dir/skills-marketplace/scripts/install-codex-cloud.sh"
+rm -rf "$tmp_dir"
 ```
 
-Then on each consumer run `/plugin marketplace update george-skills` (or enable auto-update) to pull the latest.
+Repository-specific instructions still belong in each repository's checked-in `AGENTS.md`.
 
-## Note
+## Published rules
 
-Some skills depend on local tooling (CLIs, MCP servers, browser automation, subagents) and will only fully run in an environment where those tools exist. They will still appear and trigger on the web, but tool-dependent steps require a local Claude Code setup.
+- `global-rules.md`: Claude global rules used by existing SessionStart hooks.
+- `codex-global-rules.md`: Codex global rules installed by the cloud bootstrap.
+
+All generated content passes a secret-scan gate before commit and push.

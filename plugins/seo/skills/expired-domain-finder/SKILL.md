@@ -1,3 +1,8 @@
+---
+name: expired-domain-finder
+description: Find and evaluate expired domains for niche SEO projects using scraping and SEO metrics enrichment.
+---
+
 # Expired Domain Finder for PBN Building
 
 Find high-quality expired domains for Private Blog Networks (PBNs) using automated scraping and SEO metrics enrichment.
