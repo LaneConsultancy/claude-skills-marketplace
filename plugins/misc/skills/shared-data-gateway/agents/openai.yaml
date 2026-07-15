@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shared Data Gateway"
+  short_description: "Use DataForSEO and Apify safely from Codex"
+  default_prompt: "Use $shared-data-gateway to inspect the available DataForSEO and Apify capabilities for this task."
