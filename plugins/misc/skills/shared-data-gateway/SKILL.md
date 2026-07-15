@@ -13,6 +13,8 @@ Never print `SEO_GATEWAY_TOKEN`, provider credentials, request headers, credenti
 
 Run `seo-gateway capabilities` when the required operation is unclear. Run `seo-gateway status` only to diagnose connectivity; it checks both providers without launching paid jobs.
 
+`capabilities` confirms the allowlist and quotas, not the provider price or account balance. There is no dry-run or cost-preview command.
+
 Do not bypass the gateway with direct DataForSEO or Apify credentials. Do not invent routes, actor IDs, task IDs, run IDs, or dataset IDs.
 
 ## DataForSEO
@@ -52,13 +54,19 @@ seo-gateway apify-status RUN_ID
 seo-gateway apify-items DATASET_ID 20 0
 ```
 
-Use `maxResults: 1` for one-URL verification. Google Places is capped at 15 places per search; paid enrichment and personal-data options are blocked.
+For one-URL verification, use this complete input shape:
+
+```json
+{"query":"https://example.com/page","maxResults":1,"outputFormats":["markdown"]}
+```
+
+Read the successful status response's `data.defaultDatasetId`, then pass that registered ID to `apify-items`. Its optional arguments are `limit` then `offset`; use `1 0` when one item is sufficient. Google Places is capped at 15 places per search; paid enrichment and personal-data options are blocked.
 
 ## Spend and integrity rules
 
 - Use the smallest result size that answers the task.
 - Batch search-volume keywords into one permitted task where practical.
-- Reuse the original `SEO_IDEMPOTENCY_KEY` when retrying the same paid POST.
+- The client generates a valid idempotency key automatically. Set `SEO_IDEMPOTENCY_KEY` only when an exact retry must reuse the original key; use 8-128 letters, numbers, dots, colons, underscores, or hyphens.
 - Never retry around quota or duplicate-request errors.
 - Never read arbitrary Apify run or dataset IDs; use only IDs returned by this gateway session.
 - Distinguish provider evidence from inference in the final answer.
