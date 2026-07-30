@@ -19,9 +19,36 @@ The goal is a focused local lead-generation site that can rank for a single serv
 - Be truthful. Do not invent NAP, addresses, GBP, reviews, accreditations, business history, named technicians, staff, operators, clinicians, tradespeople, specialists, providers, years trading, certifications, or memberships.
 - Do not use review schema unless reviews are real; use LocalBusiness schema only with truthful, publishable NAP/contact details.
 - Do not interlink owned rank-and-rent sites or link them back to the agency/main domain as an owned network footprint.
-- Default to a tight v1 site. Use service x location matrix mode only with SERP, volume, and unique-content justification.
+- Keep the **location** footprint tight by default. Use service x location matrix mode only with SERP, volume, and unique-content justification. The cap is on locations, not on the site: target **15+ genuinely distinct service intents** before considering any location expansion.
+- New builds must clear the workspace niche gate in `AGENTS.md`: a **£1,500 minimum average job value**, a trade that genuinely travels 20-30 miles, and a place in a regional cluster. Do not scaffold a site in a sub-floor niche.
 - Use placeholders only where clearly marked in internal specs, never as launch copy.
 - For every public site, enforce the repo quality gates in `AGENTS.md`: dev server, browser screenshots, mobile/tablet/desktop, console/network checks, accessibility, production build.
+
+## Cluster Model
+
+New sites are built as part of a regional cluster, not as standalone assets. **A cluster is one
+niche, one anchor city, and a set of satellite towns**, all within reach of a single vetted renter
+with a 20-30 mile radius. The point is to scale one renter relationship rather than multiply
+outreach. There is no target site count; growth is measured in clusters reaching renter-signed
+status.
+
+- The **anchor** is the first build and the cluster's centre of gravity, but it is **not a gate**.
+  Build satellites out around it as capacity allows, without waiting for the anchor to rank.
+  Satellite SERPs are weaker, so satellites often rank and produce leads sooner, and aggregate lead
+  flow across the cluster is what signs a renter.
+- The anchor is whichever town offers the best combination of demand and winnability, not the
+  largest. Anchors need 80,000+ population and 10+ map-pack operators; satellites need 25,000+ and
+  5+.
+- Confirm a suitable renter **exists** before the first site goes up. A signed renter is not
+  required, but a region with no contractor whose radius covers the cluster cannot host one.
+- **Duplicate content control is the central technical risk and it is stricter here, not looser.**
+  Building several sites in one niche concurrently raises cross-site duplication risk. Run
+  `sibling-uniqueness-audit` before every satellite launch, write each satellite independently, never
+  town-swap a source document, make H2/H3 outlines genuinely differ between towns, and never
+  interlink cluster sites. Vary the design treatment rather than shipping visually identical
+  properties.
+- The same local operators see every site in a regional cluster, unlike a dispersed portfolio.
+  Genuinely differentiated content and truthful trust claims are the only mitigation.
 
 ## Inputs
 
@@ -32,9 +59,17 @@ Collect or infer these before building:
 - Microvertical: e.g. `emergency mobile mechanics`, `sports injury physiotherapy`, or `lockouts`
 - Location: e.g. `Colchester`
 - Domain: exact/partial match if known
+- Cluster ID, and whether this site is the cluster's anchor or a satellite
+- Trade service radius in miles, evidenced from operator service-area pages
 - Map-pack strength and organic opportunity
-- Volume/difficulty: DataForSEO when available, otherwise tool/source noted
-- Average job value and likely lead value
+- Map-pack operator count: 10+ for an anchor, 5+ for a satellite
+- Top-3 competitor indexed page count, counted from their `sitemap.xml`
+- Competitor weakness score, 0-6, from `tools/niche-gate/`
+- Volume/difficulty: DataForSEO when available, otherwise tool/source noted. Context only, never a gate
+- Average job value, against the £1,500 floor for new builds, and likely lead value
+- Close speed: fast, medium, or slow
+- Renter supply: a vetted contractor whose radius covers the whole intended cluster
+- Defensible rent, calculated by `tools/lead-readiness/lead_value.py`, not estimated
 - Monetisation model: exclusive rental, per-lead, rev share, first-lead-free intro, or test-only
 - Phone routing: Twilio number or temporary CTA state
 - Form routing: custom Astro form or Tally
@@ -57,8 +92,50 @@ Before writing copy or code, create `spec/` research files.
    - `rank-and-rent-playbook.pdf`
    - the relevant spreadsheet row, if available
 
-2. Niche gate:
-   - Record microvertical, map-pack strength, volume/difficulty, average job value, and monetisation model.
+2. Niche gate. Cheap disqualifiers run first.
+
+   **Hard floors. Fall below any one of these and the candidate is rejected before any scoring.**
+
+   | Filter | Threshold |
+   | --- | --- |
+   | Average job value | **£1,500 minimum** |
+   | Trade service radius | **Genuinely travels 20-30 miles** |
+   | Anchor city population | **80,000+** |
+   | Satellite town population | **25,000+** |
+   | Map-pack operator count | **10+ in an anchor, 5+ in a satellite** |
+   | Renter supply | **A vetted contractor whose radius covers the whole intended cluster** |
+
+   The £1,500 floor is a settled decision about deal quality and renter economics: at £120 x 30%
+   close x 10% commission the lead is worth £3.60, so a £400/month rent would need ~111 leads a
+   month. Map-pack operator count is the demand proxy and carries the load population used to. It
+   must not be relaxed alongside the 80k population floor.
+
+   **Competitor weakness score, 0-6, on the top three to five organic results.** This is the real
+   difficulty measure. Use `tools/niche-gate/` for the countable signals. One point each:
+
+   1. Indexed pages <= 15. The strongest signal, and it sets your page target. Count from the
+      competitor's `sitemap.xml`, not a `site:` query. No sitemap at all is itself a weakness signal.
+   2. No exact or partial match domain in the top five.
+   3. H1/H2/H3 structure absent, generic, or not keyword-aligned.
+   4. Five or fewer service pages, built for utility rather than search.
+   5. Low referring-domain counts.
+   6. Directory/aggregator dominance (Checkatrade, Bark, Rated People). A mixed signal in the UK:
+      weak local operators, but compressed organic slots. Treat with suspicion.
+
+   **Demoted to supporting evidence, not gates.** Search volume is context only. Zero reported volume
+   with a populated map pack is buildable. Keyword difficulty and domain rank are context only.
+
+   **Niche shape.** Prefer obscure sub-niches over broad trades; avoid plumbing, HVAC, and general
+   handyman. Avoid high-ticket-but-slow-closing work (kitchen and bathroom remodelling, ADU-type
+   construction, driveways and patios) because leads close over months against heavy price-shopping
+   and the renter never attributes revenue to you. Record close speed next to the ticket estimate.
+   For clusters, radius beats urgency: favour booked, surveyed, or scheduled work. Emergency niches
+   can be built, but only as standalone anchor-only sites.
+
+   Record the cluster ID and anchor/satellite role, trade radius, map-pack operator count, top-3
+   indexed page count, weakness score, close speed, renter supply status, calculated defensible rent,
+   and the monetisation model.
+
    - Record contractor/renter status, agreement status, intro offer status, and speed-to-lead requirements.
 
 3. SERP check for the primary keyword:
@@ -85,7 +162,9 @@ Before writing copy or code, create `spec/` research files.
 
 ## Recommended Sitemap
 
-Keep sites tight. Do not create broad programmatic pages until the primary page is strong.
+Keep the **location** footprint tight. Do not create broad programmatic location pages until the
+primary page is strong. Service breadth is the opposite case: it is the mechanism by which a site
+outranks local competitors without backlinks, and it is not capped.
 
 Minimum:
 
@@ -93,6 +172,18 @@ Minimum:
 - `/contact/`
 - `/privacy-policy/`
 - `/terms/`
+
+Service pages:
+
+- **Target 15+ genuinely distinct service intents before considering any location expansion.** A
+  distinct intent means a different searcher with a different problem and a different heading
+  structure, not a synonym. Build a new page when the two queries are contextually distinct; fold
+  them together when they are near-synonyms.
+- **Competitor indexed page count is the practical difficulty signal.** If page-one competitors index
+  around ten pages, 25-30 well-differentiated pages is a credible route to outranking them without
+  backlinks.
+- Cloning one page across twenty postcode villages is a doorway matrix and stays banned. Expanding
+  service intent is not.
 
 Optional when justified by SERP/content depth:
 
@@ -224,7 +315,8 @@ When a rank-and-rent site needs generated raster imagery, the builder may invoke
 Do not call a site complete until:
 
 - Primary keyword intent is clearly targeted.
-- Niche gate records microvertical, map-pack strength, volume/difficulty, average job value, and monetisation model.
+- Niche gate records microvertical, cluster ID and anchor/satellite role, trade radius, map-pack strength and operator count, top-3 competitor indexed page count, competitor weakness score, average job value against the £1,500 floor, close speed, renter supply status, calculated defensible rent, and monetisation model.
+- Service breadth is planned to 15+ distinct service intents, and any location expansion is deferred until that floor is met.
 - Top competitor/backlink notes exist.
 - Matrix mode is either off or justified with SERP/volume/unique-content evidence, with primary location pages capped at 3-6 and each one passing the removed-city-name test (~50% genuinely location-specific content).
 - No placeholder launch copy remains.
