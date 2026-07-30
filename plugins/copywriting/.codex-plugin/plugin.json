@@ -1,15 +1,15 @@
 {
   "name": "copywriting",
   "version": "1.0.0",
-  "description": "Copywriting and content: sales copy, email, social, voice, editing, anti-slop. (20 skills)",
+  "description": "Copywriting and content: sales copy, email, social, voice, editing, anti-slop. (19 skills)",
   "author": { "name": "George Lane", "email": "georgejlane@icloud.com", "url": "https://github.com/LaneConsultancy" },
   "homepage": "https://github.com/LaneConsultancy/claude-skills-marketplace",
   "repository": "https://github.com/LaneConsultancy/claude-skills-marketplace.git",
   "skills": "./skills/",
   "interface": {
     "displayName": "Copywriting",
-    "shortDescription": "Copywriting and content: sales copy, email, social, voice, editing, anti-slop. (20 skills)",
-    "longDescription": "Copywriting and content: sales copy, email, social, voice, editing, anti-slop. (20 skills)",
+    "shortDescription": "Copywriting and content: sales copy, email, social, voice, editing, anti-slop. (19 skills)",
+    "longDescription": "Copywriting and content: sales copy, email, social, voice, editing, anti-slop. (19 skills)",
     "developerName": "George Lane",
     "category": "Productivity",
     "capabilities": [],

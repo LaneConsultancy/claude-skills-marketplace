@@ -61,6 +61,23 @@ Do not use any of the following phrases or close variants:
 - Do not use the false-authority voice where every claim sounds like settled consensus when it's actually opinion.
 - Do not end paragraphs with one-sentence dramatic kickers meant to sound profound.
 
+## Sentence mechanics to avoid
+
+These survive a phrase blacklist untouched. Catch them at the sentence level.
+
+- **Colon reveals.** Noun phrase, colon, lowercase dramatic reveal: "The detail that makes it work: a separate agent grades it." Write it as a plain sentence. Colons are for lists, labels, and quotes.
+- **Trailing `-ing` pseudo-analysis.** "...highlighting the team's commitment," "...underscoring the shift," "...reflecting a broader trend." These pretend to explain meaning and explain nothing. State the actual consequence instead.
+- **Importance puffery.** "Stands as a testament to," "marks a pivotal moment," "plays a vital role," "solidifies its position." State the fact; let the reader decide if it matters.
+- **Weasel attribution.** "Experts agree," "studies show," "industry reports suggest," "many argue," "widely regarded as." Name the source or cut the claim. Never invent one.
+- **Synonym cycling.** Rotating terms for variety: "The agent reviews the draft. The assistant scores the piece. The tool suggests fixes." If the clear word is right, repeat it.
+- **Fake-strong verbs.** "Serves as a centralised hub for," "acts as a bridge between." Prefer "is" and "has" when clearer, or name what the thing actually does.
+- **Negative listing.** "Not a X. Not a Y. A Z." Just say Z.
+- **Dramatic fragmentation.** "X. And Y. And Z." / "That's it. That's the whole thing."
+- **Robotic rhythm.** Repeated sentence shapes, identical paragraph lengths, stacked punchy fragments.
+- **Fake-profound kickers.** The final "deep" line that turns the point into an aphorism or mic-drop. Delete it — don't rewrite it into a better metaphor. End on the clearest concrete sentence already there.
+- **Formatting slop.** Emoji in headings, bold sprinkled mid-sentence, bullets where two sentences of prose read better, headers over two-sentence sections.
+- **Em dashes.** Not a default rhythm crutch. None in short copy; 1-2 in a long piece only where they clearly beat a comma, full stop, or parentheses.
+
 ## Word-level patterns to avoid
 
 - Do not overuse: "landscape," "paradigm," "leverage," "robust," "seamless," "ecosystem," "holistic," "nuanced," "compelling," "innovative," "crucial," "essential," "fundamental."
@@ -69,6 +86,12 @@ Do not use any of the following phrases or close variants:
 - Do not use "unlock" metaphorically (as in "unlock potential").
 - Do not use "double-edged sword."
 - Do not use "at the intersection of X and Y."
+- Also banned outright: utilise, facilitate, empower, streamline, embark, supercharge, harness, ever-evolving, tapestry, realm, beacon, multifaceted, meticulous, intricate, paramount, "a testament to", "game changer", "this changes everything".
+- Cut often-empty adverbs where they add nothing: just, literally, honestly, simply, actually, truly, fundamentally, importantly, crucially, inherently, inevitably. Keep one when it carries real emphasis, uncertainty, or the writer's spoken rhythm.
+
+## Language
+
+British English throughout: -ise/-isation, -our, -re, -ce nouns / -se verbs, doubled l before suffixes (travelled, modelling). Dates as 30 July 2026. Money as £1,200. Metric units. British vocabulary (mobile, holiday, flat, autumn, maths). Never convert inside a quote, brand name, or code.
 
 ---
 
