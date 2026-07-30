@@ -73,6 +73,6 @@ Off-pillar posts should be rare (20% rule).
 - Writing blog posts, articles, long-form content — use `content-generation-optimization` or `copywriting`
 - Writing marketing emails — use `email-campaign-copy` or `email-sequence`
 - Writing website copy — use `copywriting` or `conversion-copywriting`
-- Rewriting arbitrary AI text to sound human — use `humanize`
+- Rewriting arbitrary AI text to sound human — use `no-ai-slop`
 
 This skill is specifically for LinkedIn feed posts (short-form native content) in George's voice.
