@@ -240,7 +240,29 @@ TWILIO_PHONE_NUMBER=
 
 ## Frontend Design Standard
 
-New public-facing rank-and-rent sites must use the `impeccable` design skill/guidance during frontend shaping, implementation, and polish. Treat frontend craft as part of conversion and SEO quality, not afterthought polish.
+**Read `DESIGN.md` at the workspace root before writing any frontend code. It is binding.** It defines
+the constant token API, the accessibility thresholds, the component contracts, the anti-pattern list,
+and the per-site variation axes. Where `DESIGN.md` and generic design guidance disagree, `DESIGN.md`
+wins. A build that has not read it will reproduce the defects it exists to prevent.
+
+New public-facing rank-and-rent sites must use the `impeccable` design skill/guidance during frontend shaping, implementation, and polish, constrained by `DESIGN.md`. Treat frontend craft as part of conversion and SEO quality, not afterthought polish.
+
+### Per-site design variation is a build requirement
+
+Sites in this workspace are same-operator properties, often clustered in one region where the same
+local competitors see all of them. Visually identical siblings are a detectable footprint, not a time
+saving. `DESIGN.md` therefore defines a shared quality bar plus five axes that must differ per site:
+palette family, type pairing, surface/edge treatment, imagery direction, and layout rhythm.
+
+- **Within a cluster:** every site must differ from every sibling on **all five** axes.
+- **Across clusters:** at least **three of five**.
+- Regardless of axes, no two sites may share the wordmark construction, icon set, button radius, H1
+  sentence pattern, section-label cadence, footer layout, or hero composition.
+- Clone the architecture freely. Never clone the appearance.
+
+The chosen values must be recorded in the site's own `AGENTS.md` under a `## Design Variation Record`
+block (template in `DESIGN.md` section 2.3), including the measured contrast ratios. **A site whose
+`AGENTS.md` has no Design Variation Record is not complete**, however good it looks.
 
 - Produce production-grade, visually distinctive frontend work; avoid template-looking local-service pages.
 - Choose the design direction from the niche, audience, physical service context, and search intent, not from category reflex.
@@ -282,11 +304,22 @@ When a rank-and-rent site needs generated raster imagery, the builder may invoke
    - Write page copy before coding.
    - Keep all launch copy free of placeholders and fake proof.
 
-4. **Frontend Shaping**
-   - Apply `impeccable` design guidance before coding public UI.
-   - Define the niche-specific design direction, image/art direction, typography/spacing rhythm, CTA hierarchy, and mobile-first layout approach.
-   - Decide whether imagery will be real/licensed, generated, illustrated/vector/code-native, or omitted; document the asset plan and truth constraints.
-   - Reject template-looking or AI-default patterns before implementation.
+4. **Design** (mandatory phase - do not start coding public UI without completing it)
+   - **Read `DESIGN.md` at the workspace root in full.** It is binding on this build.
+   - Write the one-sentence physical scene (`DESIGN.md` section 3.4) into the site's `AGENTS.md`: who
+     is looking at this, where, in what light, in what state of mind. Let it force the light/dark answer.
+   - List every sibling site in the cluster and its recorded axis choices. Pick this site's five axis
+     values so it differs on all five from every sibling (three of five across clusters).
+   - Choose or derive the palette. Compute all eleven contrast pairs in `DESIGN.md` section 3.2 and
+     record the ratios. Do not eyeball them; do not proceed on a failing pair.
+   - Choose the type pairing and confirm both faces are self-hostable and subsettable. Plus Jakarta
+     Sans is banned - it is the existing portfolio's fingerprint.
+   - Append the `## Design Variation Record` block to the site's `AGENTS.md` before coding.
+   - Apply `impeccable` design guidance within those constraints: niche-specific direction, image/art
+     direction, typography/spacing rhythm, CTA hierarchy, mobile-first layout.
+   - Decide whether imagery will be real/licensed, generated, illustrated/vector/code-native, or omitted; document the asset plan and truth constraints. "No photography" is a legitimate answer.
+   - Reject template-looking or AI-default patterns before implementation. Check the shaping against
+     the `DESIGN.md` anti-pattern list while it is still cheap to change.
 
 5. **Astro Build**
    - Scaffold or update the Astro project.
@@ -304,11 +337,73 @@ When a rank-and-rent site needs generated raster imagery, the builder may invoke
    - Verify the frontend design standard: distinctive niche fit, strong typography/spacing, domain-relevant imagery, accessible contrast, deliberate CTA hierarchy, and no template/AI-default patterns.
    - Check realistic long site names, phone numbers, service names, location strings, and nearby-area names at each viewport.
    - Verify Core Web Vitals pass criteria: LCP under 2.5s and INP under 300ms, both measured at the 75th percentile (PageSpeed Insights field data).
+   - **Run the Visual Integrity Gate below at 320px, 375px, 768px, and 1280px on every page type.**
+     axe-core does not catch overlap, clipping, truncation, or a CTA covering a CTA. This does.
+   - **Save screenshot evidence** to `verification-screenshots/<page>-<width>.png` at 375, 768, and
+     1280 for the homepage, one service page, the contact page, and the 404. Full-page, not viewport.
    - Run production build and verify production rendering.
 
 7. **Handoff**
    - Summarize pages built, keyword targets, lead routing status, contractor/renter status, agreement-before-release status, backlink opportunities, and remaining launch blockers.
    - Add the post-launch Google Search Console loop: review position 7-33 doorstep keywords and impression-rich queries, then improve existing pages or add justified support pages.
+
+## Visual Integrity Gate
+
+Run against the **rendered page**, at 320, 375, 768, and 1280, on the homepage, one service page, the
+contact page, and the 404. Every check is objective and scriptable. Any failure is a blocker.
+
+Before running any scroll-based check, neutralise smooth scrolling - `scroll-behavior: smooth` makes
+`window.scrollTo` animate, so geometry read immediately afterwards is stale and the gate silently
+reports zero problems on a broken page. Set `document.documentElement.style.scrollBehavior = 'auto'`
+and use `window.scrollTo({top: y, behavior: 'instant'})`.
+
+**G1 - Horizontal overflow.** `document.documentElement.scrollWidth <= window.innerWidth` at every
+width. Then: no element's bounding rect extends past the viewport on either side (excluding
+deliberately off-screen items such as skip links and honeypots).
+
+**G2 - Navigation not clipped.** For every `nav ul`: `scrollWidth <= clientWidth + 1`. No nav
+ancestor may carry `overflow-x: auto|scroll` or a `mask-image` fade. No nav item may be partially
+outside the viewport.
+
+**G3 - No truncation.** No element in the rendered page has a computed `-webkit-line-clamp` other
+than `none`, and no element has `text-overflow: ellipsis` while `scrollWidth > clientWidth`. Also
+assert no visible text node ends in a lone ellipsis unless the source copy literally contains it.
+
+**G4 - Nothing overlaps the sticky CTA.** With the bar's rect as `B`, step scroll from 0 to
+`scrollHeight` in 25px increments. At every step, no interactive element (`a[href]`, `button`,
+`input`, `select`, `textarea`, `summary`) outside the bar may have a rect intersecting `B` while
+within the viewport horizontally. Zero hits required - not "few".
+
+**G5 - One call action per viewport (Rule CTA-1).** At every 25px scroll step, count visible
+`a[href^="tel:"]` elements with a non-zero rect inside the viewport. Must be `<= 1` at every step.
+
+**G6 - Tap targets.** Every interactive element at least 44x44 CSS px at 375px, with at least 8px
+clear space to the next target.
+
+**G7 - Contrast.** Computed foreground vs composited background for every text node: at least 4.5:1
+(3:1 for large text). Separately, every form control's border colour vs its background: at least
+3:1. The second check is the one axe misses.
+
+**G8 - H1 integrity.** Exactly one `<h1>`; `h1.textContent.trim() !== document.title`; the `h1` does
+not contain a pipe character; heading levels do not skip.
+
+**G9 - Hero blink test.** At 375x667, the `h1` and the primary CTA are both fully above
+`innerHeight - stickyBarHeight`, with zero scrolling.
+
+**G10 - Content stress.** Re-render with a 34-character site name, a 32-character service name, and
+a 24-character location string. Repeat G1-G3. Nothing clips, overflows, or overlaps.
+
+**G11 - No footprint.** No `<a>` on any page points to the owner, the agency, or another owned
+property. Grep the built output for sibling domains and for any "web design by" credit.
+
+**G12 - Sibling difference.** The site's `AGENTS.md` contains a `## Design Variation Record`, and its
+five axis values differ from every cluster sibling's on all five (three of five across clusters).
+Token values (`--canvas`, `--brand`, `--ink`, font families) must not match a sibling's.
+
+**G13 - No-JS.** With JavaScript disabled: the nav is usable, the FAQ is readable, the sticky CTA is
+present, and no content is invisible.
+
+Record the gate result and the screenshot paths in `spec/build-state.md`.
 
 ## Completion Criteria
 
@@ -334,6 +429,19 @@ Do not call a site complete until:
 - Any generated images have passed visual QC, are saved inside the site workspace, are documented with path/tool/prompt/QC status, and do not look AI-generated or misleading.
 - Realistic long site names, phone numbers, service names, location strings, and nearby-area names have been tested at 375px, 768px, and 1440px.
 - Post-launch GSC doorstep keyword loop is documented.
+- `DESIGN.md` at the workspace root has been read and applied; no listed anti-pattern is present.
+- The site's `AGENTS.md` contains a completed `## Design Variation Record`, including measured
+  contrast ratios for all eleven pairs in `DESIGN.md` section 3.2.
+- The five variation axes differ from every cluster sibling on all five (three of five across
+  clusters), and no sibling shares the wordmark, icon set, button radius, H1 pattern, section-label
+  cadence, footer layout, or hero composition.
+- Fonts are self-hosted and subset. No third-party font CDN request in the network log.
+- The Visual Integrity Gate (G1-G13) passes with zero blocking findings at 320px, 375px, 768px, and
+  1280px, on the homepage, a service page, the contact page, and the 404.
+- Screenshot evidence exists in `verification-screenshots/` at 375px, 768px, and 1280px for the
+  homepage, a service page, the contact page, and the 404. A build without saved screenshots is not
+  verified, regardless of what the agent reports.
 - Dev and production builds pass.
 - Mobile, tablet, and desktop screenshots are clean.
-- Console/network/accessibility checks have no blocking issues.
+- Console/network/accessibility checks have no blocking issues. A passing axe run alone does not
+  satisfy this line; the Visual Integrity Gate must also pass.
