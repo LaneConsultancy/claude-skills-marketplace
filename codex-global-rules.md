@@ -28,6 +28,8 @@ For live systems, ads, automations, lead flows, booking flows, or deployments:
 
 Use sub-agents when they are available and genuinely help. Delegate bounded, independent work that can run in parallel, especially codebase exploration, implementation slices, code review, copywriting, market research, SEO checks, and release quality checks.
 
+For cost-efficient delegation, prefer `gpt-5.6-luna` with `max` reasoning effort whenever that model is exposed by the current runtime. If Luna is unavailable, use `gpt-5.6-terra` with `max` reasoning effort as the low-cost fallback. Use the inherited or stronger model only when a specialist requires it, the task is high-risk or unusually difficult, or the cheaper model has already failed to produce a reliable result. Do not claim a requested model was used unless the delegation tool accepted that exact model override.
+
 Keep urgent blocking work local when waiting for a sub-agent would slow the critical path.
 
 When delegating:
