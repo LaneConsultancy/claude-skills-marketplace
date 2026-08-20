@@ -1,15 +1,14 @@
 ---
-name: seo-local
+name: seo-local-uk
 description: >
-  Local SEO analysis covering Google Business Profile optimization, NAP
-  consistency, citation health, review signals, local schema markup,
-  location page quality, multi-location SEO, and industry-specific
-  recommendations. Detects business type (brick-and-mortar, SAB, hybrid)
-  and industry vertical (restaurant, healthcare, legal, home services,
-  real estate, automotive). Use when user says "local SEO", "Google
-  Business Profile", "GBP", "map pack", "local pack", "citations",
-  "NAP consistency", "local rankings", "service area", "multi-location",
-  or "local search".
+  UK local-SEO overlay for George's trade/service-business sites. Layers
+  UK-specific guidance on top of a generic local audit: Gas Safe and trade
+  credential E-E-A-T signals, original-photography requirements, IndexNow
+  via Cloudflare for Bing/ChatGPT visibility, GBP link-URL strategy per the
+  Sterling Sky Diversity Update, and the December 2025 core-update quality
+  overlay. Sourced from references/shared-seo/local-seo-playbook-2026.md.
+  Use for UK local businesses alongside (not instead of)
+  claude-seo:seo-local, which handles the general audit mechanics.
 user-invokable: true
 argument-hint: "[url]"
 allowed-tools:
@@ -246,7 +245,7 @@ The December 2025 core update extended E-E-A-T expectations beyond YMYL into all
 
 ## AI Search Impact on Local
 
-**Do not duplicate seo-geo analysis.** Provide local-specific AI context and recommend `/seo geo <url>` for full analysis.
+**Do not duplicate claude-seo:seo-geo analysis.** Provide local-specific AI context and recommend `/seo geo <url>` for full analysis.
 
 Key local AI facts:
 - AI Overviews appear on up to 68% of local searches (Whitespark Q2 2025)

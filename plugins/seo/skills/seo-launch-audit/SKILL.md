@@ -8,7 +8,7 @@ description: >
   404s, missing OG tags, and redirect chains. Use when user says "launch
   audit", "pre-launch SEO", "go-live check", "SEO gotchas", "newly
   launched site", "check site launched correctly", or asks to verify a
-  recently-deployed site. For deeper scored audits, use seo-technical.
+  recently-deployed site. For deeper scored audits, use claude-seo:seo-technical.
 user-invokable: true
 argument-hint: "[url]"
 allowed-tools:
@@ -22,7 +22,7 @@ allowed-tools:
 
 A pre-flight check for newly-launched websites. Every check returns PASS, WARN, or FAIL. The overall verdict is binary in spirit: if any check FAILs, the site is NOT ready to ship. This skill is deliberately strict — launch audits are about catching embarrassing go-live bugs, not negotiating scores.
 
-**Not this skill's job:** deep technical audits (use `seo-technical`), Core Web Vitals scoring, schema validation (use `seo-schema`), accessibility audits.
+**Not this skill's job:** deep technical audits (use `claude-seo:seo-technical`), Core Web Vitals scoring, schema validation (use `claude-seo:seo-schema`), accessibility audits.
 
 ---
 
@@ -56,7 +56,7 @@ Parse for:
 - HTTP status code (200 expected, 404 → WARN)
 - Any `User-agent: *` block with `Disallow: /` → **FAIL: site blocks all crawlers** (classic staging-robots-shipped gotcha)
 - `Sitemap:` directives — collect URLs
-- AI crawler rules (informational, not scored here — belongs in `seo-technical`)
+- AI crawler rules (informational, not scored here — belongs in `claude-seo:seo-technical`)
 
 ### Step 4. Discover and fetch sitemap(s)
 

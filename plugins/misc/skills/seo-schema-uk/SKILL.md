@@ -1,9 +1,12 @@
 ---
-name: seo-schema
+name: seo-schema-uk
 description: >
-  Detect, validate, and generate Schema.org structured data. JSON-LD format
-  preferred. Use when user says "schema", "structured data", "rich results",
-  "JSON-LD", or "markup".
+  UK local-business schema overlay. Covers LocalBusiness subtype selection
+  (Plumber, HVACBusiness, Electrician, etc.), character-exact NAP matching
+  against Google Business Profile, and sameAs entity-consolidation strategy
+  across GBP, social, and directory listings. Use for UK local-business
+  markup alongside (not instead of) claude-seo:seo-schema, which handles
+  general Schema.org detection, validation, and generation.
 user-invokable: true
 argument-hint: "[url]"
 allowed-tools:

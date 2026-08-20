@@ -1,7 +1,7 @@
 ---
 name: programmatic-seo
 version: 1.0.0
-description: When the user wants to create SEO-driven pages at scale using templates and data. Also use when the user mentions "programmatic SEO," "template pages," "pages at scale," "directory pages," "location pages," "[keyword] + [city] pages," "comparison pages," "integration pages," or "building many pages for SEO." For auditing existing SEO issues, see seo-audit.
+description: When the user wants to create SEO-driven pages at scale using templates and data. Also use when the user mentions "programmatic SEO," "template pages," "pages at scale," "directory pages," "location pages," "[keyword] + [city] pages," "comparison pages," "integration pages," or "building many pages for SEO." For auditing existing SEO issues, see claude-seo:seo-audit.
 ---
 
 # Programmatic SEO
@@ -231,6 +231,6 @@ Watch for: Thin content warnings, Ranking drops, Manual actions, Crawl errors
 
 ## Related Skills
 
-- **seo-audit**: For auditing programmatic pages after launch
+- **claude-seo:seo-audit**: For auditing programmatic pages after launch
 - **schema-markup**: For adding structured data
 - **competitor-alternatives**: For comparison page frameworks
