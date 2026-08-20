@@ -10,9 +10,9 @@
     { "name": "dev-workflow", "source": "./plugins/dev-workflow", "description": "Development workflow: TDD, debugging, planning, code review, git worktrees, security. (18 skills)", "version": "1.0.0" },
     { "name": "marketing-strategy", "source": "./plugins/marketing-strategy", "description": "Marketing strategy: offers, pricing, psychology, ICP discovery, customer research, launches. (16 skills)", "version": "1.0.0" },
     { "name": "media", "source": "./plugins/media", "description": "Media generation: images, video, audio, screenshots, transcripts, Remotion. (9 skills)", "version": "1.0.0" },
-    { "name": "misc", "source": "./plugins/misc", "description": "Miscellaneous skills not yet categorized. (9 skills)", "version": "1.0.0" },
+    { "name": "misc", "source": "./plugins/misc", "description": "Miscellaneous skills not yet categorized. (7 skills)", "version": "1.0.0" },
     { "name": "reference-docs", "source": "./plugins/reference-docs", "description": "Reference and document tooling: document creation, PDF handling, OpenAI docs. (3 skills)", "version": "1.0.0" },
-    { "name": "seo", "source": "./plugins/seo", "description": "SEO toolkit: audits, technical, schema, sitemaps, local, programmatic, content. (9 skills)", "version": "1.0.0" },
+    { "name": "seo-ops", "source": "./plugins/seo-ops", "description": "George's own SEO additions: UK local/schema overlays, launch audits, competitor research, GBP management, programmatic and clone-dedup tooling. Complements the claude-seo plugin. (11 skills)", "version": "1.0.0" },
     { "name": "web-dev", "source": "./plugins/web-dev", "description": "Web development: site builders, UI design, Playwright, and deploys. (9 skills)", "version": "1.0.0" }
   ]
 }

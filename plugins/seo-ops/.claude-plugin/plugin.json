@@ -1,0 +1,6 @@
+{
+  "name": "seo-ops",
+  "description": "George's own SEO additions: UK local/schema overlays, launch audits, competitor research, GBP management, programmatic and clone-dedup tooling. Complements the claude-seo plugin. (11 skills)",
+  "version": "1.0.0",
+  "author": { "name": "George Lane", "email": "georgejlane@icloud.com" }
+}
