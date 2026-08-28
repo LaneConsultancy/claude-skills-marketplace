@@ -68,13 +68,11 @@ You are a SERP data collection agent. Your task is to collect search results for
 **Language:** en
 
 **Instructions:**
-1. Use the `mcp__dataforseo__serp_organic_live_advanced` tool with these parameters:
-   - keyword: "[KEYWORD]"
-   - location_name: "[LOCATION]"
-   - language_code: "en"
-   - device: "desktop"
-   - depth: 10
-   - people_also_ask_click_depth: 2
+1. Use `mcp__dataforseo__api_request` with:
+   - method: "POST"
+   - path: "/v3/serp/google/organic/live/advanced"
+   - data: [{ keyword: "[KEYWORD]", location_name: "[LOCATION]", language_code: "en", device: "desktop", depth: 10, people_also_ask_click_depth: 2 }]
+   - noAiMode: true
 
 2. Extract and return ONLY this JSON structure (no other text):
 
@@ -223,11 +221,20 @@ You are an on-page SEO analysis agent. Your task is to analyse a competitor page
 
 **Instructions:**
 
-1. Use `mcp__dataforseo__on_page_content_parsing` with:
-   - url: "[URL]"
+1. Use `mcp__dataforseo__api_request` with:
+   - method: "POST"
+   - path: "/v3/on_page/task_post"
+   - data: [{ target: "[URL]", max_crawl_pages: 1, enable_content_parsing: true }]
+   - noAiMode: true
 
-2. Use `mcp__dataforseo__on_page_lighthouse` with:
-   - url: "[URL]"
+   After the crawl completes, capture its task id and use the same tool with path
+   `/v3/on_page/content_parsing` and data `[{ id: "[TASK_ID]", url: "[URL]" }]`.
+
+2. Use the same tool with:
+   - method: "POST"
+   - path: "/v3/on_page/lighthouse/live/json"
+   - data: [{ url: "[URL]" }]
+   - noAiMode: true
 
 3. If content parsing fails, fallback to `mcp__apify__apify-slash-rag-web-browser` with:
    - query: "[URL]"

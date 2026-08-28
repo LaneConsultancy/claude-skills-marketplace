@@ -41,7 +41,7 @@ Abort with a clear error if the URL is unreachable (see Error Handling below).
 
 Check which MCP tools are available before starting:
 
-- **DataForSEO MCP** — prefer `mcp__dataforseo__on_page_instant_pages` for batch page analysis (status codes, redirect chains, on-page issues)
+- **DataForSEO MCP** — prefer `mcp__dataforseo__api_request` with `method: "POST"`, `path: "/v3/on_page/instant_pages"`, `data: [{...}]`, and `noAiMode: true` for batch page analysis (status codes, redirect chains, on-page issues)
 - **curl via Bash** — always available; use for robots.txt, sitemap, precise redirect/status checks, and as fallback when MCP isn't available
 
 Note which tools were used in the report footer.
@@ -191,7 +191,7 @@ If no sitemap is found: emit WARN, and fall back to crawling homepage `<a href>`
 - Do NOT use `grep -oE 'content="[^"]+"'` or similar — it breaks on single quotes inside double-quoted attributes and vice versa, producing false "short description" or "missing canonical" WARNs.
 - If `html.parser` fails on malformed HTML, fall back to `BeautifulSoup(html, "html.parser")` if available; otherwise flag the page as "could not parse" and continue.
 
-**If DataForSEO MCP is available**, batch URLs via `on_page_instant_pages` for status/redirect checks (faster on large sites), but still use the Python parser for meta extraction — the DataForSEO response doesn't include every meta tag we need.
+**If DataForSEO MCP is available**, batch URLs via `mcp__dataforseo__api_request` using `method: "POST"`, `path: "/v3/on_page/instant_pages"`, `data: [{...}]`, and `noAiMode: true` for status/redirect checks (faster on large sites), but still use the Python parser for meta extraction — the DataForSEO response doesn't include every meta tag we need.
 
 ### Step 6. Run cross-domain checks (once per audit)
 

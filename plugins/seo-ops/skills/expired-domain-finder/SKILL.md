@@ -106,10 +106,15 @@ For each domain discovered, fetch detailed metrics:
 
 **Primary Tool:**
 ```
-Tool: mcp__dataforseo__backlinks_summary
-Parameters: {
-  "target": "[domain]",
-  "include_subdomains": false
+Tool: mcp__dataforseo__api_request
+Request: {
+  "method": "POST",
+  "path": "/v3/backlinks/summary/live",
+  "data": [{
+    "target": "[domain]",
+    "include_subdomains": false
+  }],
+  "noAiMode": true
 }
 ```
 
@@ -122,10 +127,15 @@ Parameters: {
 
 **Additional enrichment (if needed):**
 ```
-Tool: mcp__dataforseo__backlinks_anchors
-Parameters: {
-  "target": "[domain]",
-  "limit": 100
+Tool: mcp__dataforseo__api_request
+Request: {
+  "method": "POST",
+  "path": "/v3/backlinks/anchors/live",
+  "data": [{
+    "target": "[domain]",
+    "limit": 100
+  }],
+  "noAiMode": true
 }
 ```
 
@@ -347,9 +357,14 @@ mcp__apify__call-actor({
 
 ```typescript
 // Step 3: Enrich with DataForSEO
-mcp__dataforseo__backlinks_summary({
-  target: "example-plumbing.co.uk",
-  include_subdomains: false
+mcp__dataforseo__api_request({
+  method: "POST",
+  path: "/v3/backlinks/summary/live",
+  data: [{
+    target: "example-plumbing.co.uk",
+    include_subdomains: false
+  }],
+  noAiMode: true
 })
 
 // Response example:
@@ -365,10 +380,15 @@ mcp__dataforseo__backlinks_summary({
 ### Getting Anchor Text Analysis
 
 ```typescript
-mcp__dataforseo__backlinks_anchors({
-  target: "example-plumbing.co.uk",
-  limit: 100,
-  order_by: "backlinks_count,desc"
+mcp__dataforseo__api_request({
+  method: "POST",
+  path: "/v3/backlinks/anchors/live",
+  data: [{
+    target: "example-plumbing.co.uk",
+    limit: 100,
+    order_by: ["backlinks_count,desc"]
+  }],
+  noAiMode: true
 })
 
 // Response example:

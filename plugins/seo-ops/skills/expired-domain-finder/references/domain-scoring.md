@@ -35,7 +35,7 @@ Higher DR/DA indicates stronger domain authority and link equity potential.
 - **DR 5-9**: +5 points
 - **DR < 5**: 0 points
 
-**Data Source**: DataForSEO `backlinks_summary` rank field
+**Data Source**: DataForSEO `/v3/backlinks/summary/live` rank field via `mcp__dataforseo__api_request` with `method: "POST"`, `data: [{...}]`, and `noAiMode: true`
 
 ---
 
@@ -71,7 +71,7 @@ Natural, branded anchor text distribution indicates organic link building rather
    - **Exact match > 40%**: -20 points (over-optimized, unnatural)
    - **Generic only > 60%**: -10 points (suspicious pattern)
 
-**Data Source**: DataForSEO `backlinks_anchors`
+**Data Source**: DataForSEO `/v3/backlinks/anchors/live` via `mcp__dataforseo__api_request` with `method: "POST"`, `data: [{...}]`, and `noAiMode: true`
 
 ---
 

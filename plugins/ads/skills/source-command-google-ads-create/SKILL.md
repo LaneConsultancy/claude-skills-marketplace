@@ -33,8 +33,8 @@ Services: {config.services}
 Locations: {config.locations.serviceAreas}
 
 Tasks:
-1. Use mcp__dataforseo__dataforseo_labs_google_keyword_ideas for each service + location combo
-2. Use mcp__dataforseo__kw_data_google_ads_search_volume for volume data
+1. Call `mcp__dataforseo__api_request` with `method: "POST"`, `path: "/v3/dataforseo_labs/google/keyword_ideas/live"`, `data: [{...}]`, and `noAiMode: true` for each service + location combo
+2. Call the same tool with `method: "POST"`, `path: "/v3/keywords_data/google_ads/search_volume/live"`, `data: [{...}]`, and `noAiMode: true` for volume data
 3. Group keywords by service and location
 4. Write full results to google-ads-keywords.json
 5. Return summary: top 20 keywords by volume, total keyword count

@@ -6,7 +6,9 @@ Quick reference for DataForSEO and Apify MCP tools used in this skill.
 
 ### 1. SERP Organic Live Advanced
 
-**Tool:** `mcp__dataforseo__serp_organic_live_advanced`
+**Tool:** `mcp__dataforseo__api_request`
+
+**Request:** `method: "POST"`, `path: "/v3/serp/google/organic/live/advanced"`, `data: [{...}]`, `noAiMode: true`
 
 **Purpose:** Get organic search results for a keyword
 
@@ -26,12 +28,17 @@ Quick reference for DataForSEO and Apify MCP tools used in this skill.
 **Example Call:**
 ```json
 {
-  "keyword": "boiler repair dartford",
-  "location_name": "United Kingdom",
-  "language_code": "en",
-  "device": "desktop",
-  "depth": 10,
-  "people_also_ask_click_depth": 2
+  "method": "POST",
+  "path": "/v3/serp/google/organic/live/advanced",
+  "data": [{
+    "keyword": "boiler repair dartford",
+    "location_name": "United Kingdom",
+    "language_code": "en",
+    "device": "desktop",
+    "depth": 10,
+    "people_also_ask_click_depth": 2
+  }],
+  "noAiMode": true
 }
 ```
 
@@ -49,7 +56,11 @@ Quick reference for DataForSEO and Apify MCP tools used in this skill.
 
 ### 2. On-Page Content Parsing
 
-**Tool:** `mcp__dataforseo__on_page_content_parsing`
+**Tool:** `mcp__dataforseo__api_request`
+
+**Request:** create a crawl with `method: "POST"`, `path: "/v3/on_page/task_post"`, task-array
+`data`, and `noAiMode: true`. Set `enable_content_parsing: true`, wait for completion, then call
+`/v3/on_page/content_parsing` with the returned task `id` and page `url`.
 
 **Purpose:** Parse page content and structure
 
@@ -57,16 +68,34 @@ Quick reference for DataForSEO and Apify MCP tools used in this skill.
 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| url | string | Yes | - | URL to parse |
-| enable_javascript | boolean | No | false | Enable JS rendering |
-| custom_user_agent | string | No | - | Custom user agent |
-| accept_language | string | No | - | Accept-Language header |
+| id | string | Yes | - | Completed OnPage crawl task ID |
+| url | string | Yes | - | Crawled page URL to parse |
 
 **Example Call:**
 ```json
 {
-  "url": "https://example.com/services/plumbing",
-  "enable_javascript": true
+  "method": "POST",
+  "path": "/v3/on_page/task_post",
+  "data": [{
+    "target": "https://example.com/services/plumbing",
+    "max_crawl_pages": 1,
+    "enable_content_parsing": true
+  }],
+  "noAiMode": true
+}
+```
+
+After that task completes:
+
+```json
+{
+  "method": "POST",
+  "path": "/v3/on_page/content_parsing",
+  "data": [{
+    "id": "TASK_ID",
+    "url": "https://example.com/services/plumbing"
+  }],
+  "noAiMode": true
 }
 ```
 
@@ -86,7 +115,9 @@ Quick reference for DataForSEO and Apify MCP tools used in this skill.
 
 ### 3. On-Page Lighthouse
 
-**Tool:** `mcp__dataforseo__on_page_lighthouse`
+**Tool:** `mcp__dataforseo__api_request`
+
+**Request:** `method: "POST"`, `path: "/v3/on_page/lighthouse/live/json"`, `data: [{...}]`, `noAiMode: true`
 
 **Purpose:** Get Lighthouse performance audit
 
@@ -102,7 +133,12 @@ Quick reference for DataForSEO and Apify MCP tools used in this skill.
 **Example Call:**
 ```json
 {
-  "url": "https://example.com/services/plumbing"
+  "method": "POST",
+  "path": "/v3/on_page/lighthouse/live/json",
+  "data": [{
+    "url": "https://example.com/services/plumbing"
+  }],
+  "noAiMode": true
 }
 ```
 
@@ -120,7 +156,9 @@ Quick reference for DataForSEO and Apify MCP tools used in this skill.
 
 ### 4. On-Page Instant Pages
 
-**Tool:** `mcp__dataforseo__on_page_instant_pages`
+**Tool:** `mcp__dataforseo__api_request`
+
+**Request:** `method: "POST"`, `path: "/v3/on_page/instant_pages"`, `data: [{...}]`, `noAiMode: true`
 
 **Purpose:** Detailed page analysis with SEO factors
 
@@ -209,11 +247,12 @@ Examples:
 - `Edinburgh,Scotland,United Kingdom`
 - `Cardiff,Wales,United Kingdom`
 
-Use `mcp__dataforseo__serp_locations` to find exact location names:
+Use `mcp__dataforseo__api_request` to fetch the country list, then filter it for the exact location name:
 ```json
 {
-  "country_iso_code": "GB",
-  "location_name": "Dartford"
+  "method": "GET",
+  "path": "/v3/serp/google/locations/GB",
+  "noAiMode": true
 }
 ```
 
@@ -227,7 +266,7 @@ Use `mcp__dataforseo__serp_locations` to find exact location names:
 |-------|-------|----------|
 | No results returned | Keyword too specific or location mismatch | Try broader keyword, check location spelling |
 | Rate limit exceeded | Too many requests | Wait and retry, reduce parallelism |
-| Invalid location | Location name not recognised | Use serp_locations tool to verify |
+| Invalid location | Location name not recognised | Use `mcp__dataforseo__api_request` with `method: "GET"`, `path: "/v3/serp/google/locations"`, and `noAiMode: true`, then filter the result |
 
 **Recovery Code Pattern:**
 ```
@@ -248,8 +287,9 @@ If SERP returns empty results:
 
 **Recovery Code Pattern:**
 ```
-If on_page_content_parsing fails:
-1. Retry with enable_javascript: true
+If `/v3/on_page/content_parsing` fails:
+1. Start a new `/v3/on_page/task_post` crawl with `enable_javascript: true` and
+   `enable_content_parsing: true`, then retry with its completed task ID
 2. If still fails, use apify-slash-rag-web-browser
 3. If Apify fails, log URL as "analysis unavailable" and continue
 ```
@@ -263,7 +303,7 @@ If on_page_content_parsing fails:
 
 **Recovery Code Pattern:**
 ```
-If on_page_lighthouse fails:
+If `/v3/on_page/lighthouse/live/json` fails:
 1. Set performance metrics to null
 2. Note in report: "Technical analysis unavailable for [URL]"
 3. Continue with content analysis only
@@ -277,7 +317,7 @@ If on_page_lighthouse fails:
 ┌─────────────────────────────────────────────────────────┐
 │                    SERP COLLECTION                       │
 │                                                         │
-│  Always use: serp_organic_live_advanced                 │
+│  api_request: /v3/serp/google/organic/live/advanced     │
 │  No fallback available                                  │
 └─────────────────────────────────────────────────────────┘
                           │
@@ -285,10 +325,10 @@ If on_page_lighthouse fails:
 ┌─────────────────────────────────────────────────────────┐
 │                   CONTENT PARSING                        │
 │                                                         │
-│  Primary: on_page_content_parsing                       │
+│  api_request: content_parsing (after task_post)         │
 │     └─→ If fails: apify-slash-rag-web-browser          │
 │                                                         │
-│  Alternative: on_page_instant_pages                     │
+│  Alternative: /v3/on_page/instant_pages                 │
 │     └─→ More detailed but slower                        │
 └─────────────────────────────────────────────────────────┘
                           │
@@ -296,7 +336,7 @@ If on_page_lighthouse fails:
 ┌─────────────────────────────────────────────────────────┐
 │                 TECHNICAL ANALYSIS                       │
 │                                                         │
-│  Primary: on_page_lighthouse                            │
+│  api_request: /v3/on_page/lighthouse/live/json          │
 │     └─→ If fails: Skip technical metrics                │
 │                                                         │
 │  No fallback - Lighthouse data is optional              │
@@ -426,25 +466,36 @@ When using content parsing, check `page_content` for JSON-LD scripts and extract
 
 **Get SERP data:**
 ```
-mcp__dataforseo__serp_organic_live_advanced
-├── keyword: "target keyword"
-├── location_name: "United Kingdom"
-├── language_code: "en"
-├── depth: 10
-└── people_also_ask_click_depth: 2
+mcp__dataforseo__api_request
+├── method: "POST"
+├── path: "/v3/serp/google/organic/live/advanced"
+├── data: [{ keyword: "target keyword", location_name: "United Kingdom",
+│            language_code: "en", depth: 10, people_also_ask_click_depth: 2 }]
+└── noAiMode: true
 ```
 
 **Parse page content:**
 ```
-mcp__dataforseo__on_page_content_parsing
-├── url: "https://competitor.com/page"
-└── enable_javascript: true
+mcp__dataforseo__api_request
+├── method: "POST"
+├── path: "/v3/on_page/task_post"
+├── data: [{ target: "https://competitor.com/page", max_crawl_pages: 1,
+│            enable_content_parsing: true }]
+└── noAiMode: true
+mcp__dataforseo__api_request
+├── method: "POST"
+├── path: "/v3/on_page/content_parsing"
+├── data: [{ id: "TASK_ID", url: "https://competitor.com/page" }]
+└── noAiMode: true
 ```
 
 **Get performance data:**
 ```
-mcp__dataforseo__on_page_lighthouse
-└── url: "https://competitor.com/page"
+mcp__dataforseo__api_request
+├── method: "POST"
+├── path: "/v3/on_page/lighthouse/live/json"
+├── data: [{ url: "https://competitor.com/page" }]
+└── noAiMode: true
 ```
 
 **Fallback scraping:**
