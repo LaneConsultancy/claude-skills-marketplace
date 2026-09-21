@@ -30,6 +30,14 @@ Use sub-agents when they are available and genuinely help. Delegate bounded, ind
 
 Keep urgent blocking work local when waiting for a sub-agent would slow the critical path.
 
+### Subagent model and usage budget
+
+- The user explicitly authorizes cheaper model overrides for subagents. Default to `gpt-5.6-luna` with `low` reasoning for routine, bounded tasks; use `medium` reasoning when the task needs more analysis.
+- Use `gpt-5.6-terra` for work that exceeds Luna's capabilities, or `gpt-5.6-sol` for demanding coding/debugging. Reserve `gpt-6-astra` for unusually complex or high-risk reasoning where the smaller models are unlikely to be adequate, or after a concrete smaller-model failure. Briefly explain an Astra escalation.
+- Set the model explicitly when spawning; do not accidentally inherit the parent model. With `collaboration.spawn_agent`, use `fork_turns="none"` and a concise, self-contained brief so the model override can apply. Include only the context, constraints, paths, and evidence needed for the task. Use a limited-history fork only when needed; full-history forks inherit the parent model and do not accept overrides.
+- Keep the number of agents and their output small. Do simple work locally; avoid duplicate investigations and unnecessary agent chains. Apply this policy to nested subagents too, and include it in their brief when they do not inherit these instructions.
+- If a preferred model is unavailable, choose the least expensive available model suitable for the task rather than silently defaulting to Astra. Preserve the user's main-task model choice.
+
 When delegating:
 - Give each agent a clear task, scope, and ownership boundary.
 - Avoid overlapping write scopes between agents.
