@@ -1,43 +1,55 @@
 ---
 name: generate-image
-description: Generate images with OpenAI image models (gpt-5.4-image-2, fallback gpt-5-image) through OpenRouter. Includes 10,000+ curated prompt templates for quick results, plus custom JSON prompting for precise control. Supports various resolutions, aspect ratios, and reference images. ALWAYS use this skill when building websites, landing pages, or web applications that require images.
+description: Generate images using Google Gemini API (gemini-3.1-flash-image-preview) as primary, with Replicate as fallback. Includes 10,000+ curated prompt templates for quick results, plus custom JSON prompting for precise control. Supports various resolutions, aspect ratios, and reference images. ALWAYS use this skill when building websites, landing pages, or web applications that require images.
 user-invocable: true
 ---
 
 # Generate Image Skill
 
-Generate high-quality images with OpenAI image models through OpenRouter.
+Generate high-quality images using Google's Gemini API directly, with Replicate as fallback.
 
-## ⚠️ MANDATORY: Provider and Models
+## ⚠️ MANDATORY: Model Requirement
 
-**All generation goes through OpenRouter, using OpenAI image models only.**
+**This skill uses Google Gemini API (`gemini-3.1-flash-image-preview`) as the PRIMARY method, with `google/nano-banana-pro` via Replicate as the FALLBACK.**
 
-- **PRIMARY**: `openai/gpt-5.4-image-2` (gpt-image-2 generation)
-- **FALLBACK**: `openai/gpt-5-image` (the helper uses it on its own if the primary fails)
-- Key: `OPENROUTER_API_KEY` from the environment (set in `~/.zshrc`). Never write the key into this file, a script, a command line or a repo.
-- Override per run with `--model`, or set `OPENROUTER_IMAGE_MODEL` / `OPENROUTER_IMAGE_FALLBACK`.
-- Do NOT call Gemini or Replicate directly. They are no longer configured.
+- **PRIMARY**: Always try Google Gemini API directly first
+- **FALLBACK**: If Gemini fails (rate limit, timeout, unavailable), use Replicate API
+- **DO NOT** use any other image generation models (FLUX, Stable Diffusion, DALL-E, etc.)
+- The acceptable API endpoints are:
+  1. PRIMARY: `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent`
+  2. FALLBACK: `https://api.replicate.com/v1/models/google/nano-banana-pro/predictions`
 
-If both models fail, report the error and ask the user how to proceed (retry, change prompt, or abandon).
+If both methods fail, report the error to the user and ask how they'd like to proceed (retry, modify prompt, or abandon).
 
 ## Usage
 
-Always call the bundled helper. Do not hand-write API calls.
-
-```bash
-python3 ~/.claude/skills/generate-image/scripts/generate_image.py \
-  --prompt "YOUR_PROMPT_HERE" \
-  --aspect-ratio 3:2 \
-  --out public/images/output.png
+Invoke this skill with:
+```
+/generate-image
 ```
 
-(Codex has the same script at `~/.codex/skills/generate-image/scripts/generate_image.py`.)
+In Codex, use this skill whenever the user asks to generate images or when building websites that need visual content.
 
-- `--reference path` (repeatable) sends reference images for style, subject or composition. Say in the prompt HOW to use each one.
-- `--aspect-ratio` accepts `1:1`, `3:2`, `2:3`, `16:9`, `9:16`, `4:5` and so on.
-- `--no-fallback` stops after the primary model.
-- Output is PNG. Convert to webp/jpg with Pillow for the web.
-- Renders take 30–120s. Run several in parallel with `&` and `wait`, or in the background.
+## Codex Runtime Notes
+
+When using this skill inside Codex, prefer the bundled helper script instead of hand-writing `curl` calls:
+
+```bash
+python3 /Users/georgelane/.codex/skills/generate-image/scripts/generate_image.py \
+  --prompt "YOUR_PROMPT_HERE" \
+  --aspect-ratio 4:5 \
+  --resolution 2K \
+  --out output.png
+```
+
+The helper:
+- Calls Gemini `gemini-3.1-flash-image-preview` first.
+- Uses `GEMINI_API_KEY` or `GOOGLE_API_KEY` if present.
+- Falls back to the local token embedded in this skill file when environment variables are not exported in the Codex shell.
+- Supports optional `--reference /path/to/image`.
+- Supports `--fallback` for Replicate if Gemini fails and a Replicate token is available.
+
+Use `/Users/georgelane/.codex/skills/generate-image/references/...` for prompt-library searches in Codex.
 
 ## Automatic Triggers
 
@@ -52,7 +64,7 @@ This skill will automatically activate when:
 ## What This Skill Does
 
 1. Takes your image description (prompt) and optional parameters
-2. Calls an OpenAI image model through OpenRouter (the helper falls back to a second OpenAI model if needed)
+2. Calls the Google Gemini API to generate the image (falls back to Replicate if needed)
 3. Downloads the generated image to your current directory (or specified web project directory)
 4. Verifies image quality — checks for AI artifacts, fine detail accuracy, and physical realism
 5. Auto-regenerates with improved prompts if quality check fails (up to 3 attempts)
@@ -222,7 +234,12 @@ Use: "professional photograph of a Worcester Bosch Greenstar 8000 combi boiler w
 
 ## Model Capabilities
 
-OpenAI gpt-image models via OpenRouter: strong prompt following, reference images for style transfer and editing, landscape / portrait / square output. They tend toward smooth mid-tones, so if a brand needs flat inks, map the pixels to the palette in post-processing.
+**Google Nano Banana Pro** is built on Gemini 3 Pro and offers:
+- High-quality image generation with detailed visuals
+- Support for reference images (up to 14 images for transformation)
+- Multiple resolution options (1K, 2K, 4K)
+- Various aspect ratios
+- Photorealistic outputs when prompted correctly
 
 ## How to Use
 
@@ -233,7 +250,10 @@ When invoked, you'll be asked for:
    - Include style, mood, lighting, composition details
    - **Never include text/words in the image** - add text separately using design tools
 
-2. **Resolution**: not a parameter. Describe the detail you need in the prompt.
+2. **Resolution** (optional): Choose image quality
+   - `1K` - Faster, lower cost ($0.15)
+   - `2K` - Balanced quality/cost (default, $0.15)
+   - `4K` - Highest quality ($0.30)
 
 3. **Aspect Ratio** (optional): Image dimensions
    - Common ratios: `1:1`, `16:9`, `9:16`, `4:3`, `3:4`
@@ -244,6 +264,10 @@ When invoked, you'll be asked for:
    - `jpg` (default) - Smaller file size
    - `png` - Higher quality, transparency support
 
+5. **Safety Filter Level** (optional): Content filtering
+   - `block_only_high` (default) - Most permissive
+   - `block_medium_and_above` - Moderate filtering
+   - `block_low_and_above` - Strictest filtering
 
 6. **Save Location** (when building websites): Specify where to save the image
    - Auto-detect project structure and suggest appropriate directory
@@ -290,13 +314,127 @@ grep -i "neon" /Users/georgelane/.codex/skills/generate-image/references/social-
 
 For website projects, also determine the appropriate save location based on the project structure.
 
-### 2. Generate
+### 2. Call Google Gemini API (Primary)
 
-Run the helper (see Usage). It prints `saved <path> via <model>` on success, and the error for each model on failure.
+Use the Google Gemini API to generate the image. This is a synchronous call that returns the image directly.
 
-### 3. Save Location
+**Gemini API Token:**
+```
+${GEMINI_API_KEY}
+```
 
-Use meaningful filenames (`hero-banner.png`, `plate-river.png`). For websites, save under the project's image directory (`public/images/…`), and convert to webp for production.
+**API Call (text-only prompt):**
+```bash
+curl -s -X POST \
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent" \
+  -H "Content-Type: application/json" \
+  -H "x-goog-api-key: ${GEMINI_API_KEY}" \
+  -d '{
+    "contents": [{
+      "parts": [
+        {"text": "YOUR_PROMPT_HERE"}
+      ]
+    }],
+    "generationConfig": {
+      "responseModalities": ["TEXT", "IMAGE"]
+    }
+  }'
+```
+
+**API Call (with reference image):**
+
+When the user provides a reference image (local file path or URL), include it as `inlineData` in the parts array alongside the text prompt. The image must be base64-encoded.
+
+```bash
+# First, base64-encode the reference image (strip newlines for JSON compatibility)
+REF_IMAGE_B64=$(base64 -i /path/to/reference-image.jpg | tr -d '\n')
+
+# Then include it in the API call
+curl -s -X POST \
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent" \
+  -H "Content-Type: application/json" \
+  -H "x-goog-api-key: ${GEMINI_API_KEY}" \
+  -d '{
+    "contents": [{
+      "parts": [
+        {"text": "YOUR_PROMPT_HERE. Use the provided reference image as a guide for style/composition/subject."},
+        {
+          "inlineData": {
+            "mimeType": "image/jpeg",
+            "data": "'"${REF_IMAGE_B64}"'"
+          }
+        }
+      ]
+    }],
+    "generationConfig": {
+      "responseModalities": ["TEXT", "IMAGE"]
+    }
+  }'
+```
+
+**Reference image notes:**
+- Set `mimeType` to match the file: `image/jpeg`, `image/png`, `image/webp`, or `image/gif`
+- You can include up to 14 reference images by adding more `inlineData` parts
+- For URLs: download the image first with `curl -s -o /tmp/ref.jpg "URL"`, then base64-encode it
+- Tell the model HOW to use the reference in your text prompt (e.g., "match the style of", "transform this image to", "use as composition reference")
+- Only include reference images when the user explicitly provides them or when a library prompt has `needReferenceImages: true`
+
+**Important**: Since Gemini doesn't have separate resolution/aspect ratio parameters, include these in the prompt itself:
+```
+Original prompt: "A sunset over mountains"
+With params: resolution=4K, aspect_ratio=16:9
+
+Enhanced prompt: "A sunset over mountains. Ultra high resolution 4K quality. Wide cinematic 16:9 aspect ratio composition."
+```
+
+### 3. Extract and Save the Image
+
+The Gemini response returns base64-encoded image data. Extract and save it:
+
+```bash
+# The response JSON contains: candidates[0].content.parts[].inlineData.data
+# Extract and decode the base64 image data:
+
+curl -s -X POST \
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent" \
+  -H "Content-Type: application/json" \
+  -H "x-goog-api-key: ${GEMINI_API_KEY}" \
+  -d '{
+    "contents": [{"parts": [{"text": "YOUR_PROMPT_HERE"}]}],
+    "generationConfig": {"responseModalities": ["TEXT", "IMAGE"]}
+  }' | jq -r '.candidates[0].content.parts[] | select(.inlineData) | .inlineData.data' | base64 -d > output.png
+```
+
+**Note**: Gemini returns PNG by default. If you need JPG, convert after saving or use the Replicate fallback which supports format selection.
+
+### 4. Download and Save
+
+Once succeeded, download the image from the URL in the `output` field.
+
+**Method 1: Meaningful filename (recommended for web projects)**
+```bash
+# Use descriptive names based on the content
+curl -s -o hero-banner.jpg "OUTPUT_URL"
+curl -s -o team-photo.jpg "OUTPUT_URL"
+curl -s -o logo-icon.png "OUTPUT_URL"
+```
+
+**Method 2: Timestamped filename (recommended for testing/general use)**
+```bash
+# IMPORTANT: Assign timestamp to variable first, then use it
+# This is more reliable than inline command substitution
+TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+curl -s -o "generated-image-${TIMESTAMP}.jpg" "OUTPUT_URL"
+```
+
+**Method 3: Simple incremental naming**
+```bash
+# For quick testing
+curl -s -o generated-image-1.jpg "OUTPUT_URL"
+curl -s -o generated-image-2.jpg "OUTPUT_URL"
+```
+
+For website projects, use Method 1 with meaningful filenames based on the content (e.g., `hero-banner.jpg`, `team-photo.jpg`, `logo-icon.png`).
 
 ### 5. Quality Verification Loop
 
@@ -413,6 +551,93 @@ If all 3 attempts produce rejected images, present the user with three options:
 
 Display the saved file path to the user and show the image with `view_image` when a visual preview is useful.
 
+## Replicate API Fallback
+
+If Google Gemini API fails (rate limits, timeouts, or unavailability), use the Replicate API as a fallback.
+
+### Replicate API Token
+```
+${REPLICATE_API_TOKEN}
+```
+
+### Fallback Implementation
+
+When Gemini fails, call the Replicate API:
+
+```bash
+curl -s -X POST https://api.replicate.com/v1/models/google/nano-banana-pro/predictions \
+  -H "Authorization: Bearer ${REPLICATE_API_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "input": {
+      "prompt": "YOUR_PROMPT_HERE",
+      "resolution": "2K",
+      "aspect_ratio": "16:9",
+      "output_format": "jpg",
+      "safety_filter_level": "block_only_high"
+    }
+  }'
+```
+
+### Polling for Replicate Results
+
+Replicate is asynchronous - it returns a prediction ID immediately. Poll the status endpoint:
+
+```bash
+curl -s https://api.replicate.com/v1/predictions/PREDICTION_ID \
+  -H "Authorization: Bearer ${REPLICATE_API_TOKEN}"
+```
+
+Check the `status` field:
+- `starting` or `processing` - Keep polling (wait 1-2 seconds between polls)
+- `succeeded` - Image is ready in the `output` field (URL to download)
+- `failed` - Check `error` field for details
+- `canceled` - Generation was canceled
+
+### Downloading from Replicate
+
+Once succeeded, download the image from the URL in the `output` field:
+```bash
+curl -s -o generated-image.jpg "OUTPUT_URL_FROM_REPLICATE"
+```
+
+### Fallback Decision Logic
+
+Use the Replicate fallback when Gemini returns:
+- HTTP 429 (Rate limit exceeded)
+- HTTP 500/503 (Service unavailable)
+- HTTP 504 (Gateway timeout)
+- Empty or malformed response
+- No image data in response
+- Network timeout
+
+### Key Differences Between APIs
+
+| Aspect | Google Gemini (Primary) | Replicate (Fallback) |
+|--------|------------------------|---------------------|
+| Response | Synchronous (waits for result) | Async polling |
+| Output | Base64 inline data | URL to download |
+| Format | Returns PNG by default | Configurable (jpg/png) |
+| Resolution | Specify in prompt text | `resolution` param (1K/2K/4K) |
+| Aspect ratio | Specify in prompt text | `aspect_ratio` param |
+| Cost | Free tier available | $0.15-$0.30 per image |
+
+### Prompt Adaptation for Replicate
+
+Replicate supports structured parameters, so you can use JSON prompts with explicit settings:
+
+```bash
+# Replicate supports these parameters directly:
+{
+  "input": {
+    "prompt": "A sunset over mountains",
+    "resolution": "4K",
+    "aspect_ratio": "16:9",
+    "output_format": "jpg"
+  }
+}
+```
+
 ## Example Prompts for Websites
 
 **Hero Images (Photorealistic):**
@@ -448,17 +673,55 @@ Display the saved file path to the user and show the image with `view_image` whe
 
 ## Pricing Reference
 
-Billed per image by OpenRouter at OpenAI rates. Check https://openrouter.ai/openai/gpt-5.4-image-2 for current prices.
+- 1K/2K resolution: $0.15 per image (~66 images per $10)
+- 4K resolution: $0.30 per image (~33 images per $10)
 
 ## Error Handling
 
-| Error | Action |
-|---|---|
-| `OPENROUTER_API_KEY is not set` | Ask the user to add it to `~/.zshrc`. Do not search for keys. |
-| HTTP 401/402 | Bad key or no credit. Tell the user. |
-| HTTP 429/5xx or timeout | The helper tries the fallback. If both fail, retry once, then report. |
-| Content policy refusal | Change the prompt. A different model does not fix it. |
-| Quality check fails | Change the prompt and regenerate (max 3 attempts), see step 5. |
+**Use Replicate API as fallback when Google Gemini fails. Never use other models (FLUX, Stable Diffusion, DALL-E).**
+
+### Error Handling Flow
+
+```
+1. Try Google Gemini API (gemini-3.1-flash-image-preview)
+   ↓ Success → Continue to quality verification
+   ↓ Failure → Check error type
+
+2. If retriable error (rate limit, timeout, unavailable):
+   → Try Replicate API (google/nano-banana-pro)
+   ↓ Success → Continue to quality verification
+   ↓ Failure → Report to user
+
+3. Quality verification loop:
+   → Read saved image, evaluate against rubric
+   → If ACCEPT → Done
+   → If REJECT + attempts remain → Modify prompt, retry from step 1
+   → If REJECT + no attempts remain → Offer user options
+
+4. If non-retriable error (invalid prompt, safety filter):
+   → Report to user, suggest prompt modification
+```
+
+### Common Issues and Solutions
+
+| Error | Primary Action | Fallback |
+|-------|---------------|----------|
+| **HTTP 429 Rate limit** | Wait 30s, retry Gemini | Use Replicate API |
+| **HTTP 503/504 Timeout** | Retry once | Use Replicate API |
+| **Service unavailable** | -- | Use Replicate API |
+| **Safety filter rejection** | Adjust prompt | Adjust prompt (same for both) |
+| **Empty/malformed response** | -- | Use Replicate API |
+| **Network timeout** | -- | Use Replicate API |
+| **Save location issues** | Fix directory | Same fix needed |
+| **Quality verification failure** | Modify prompt based on specific issues found, retry | Same |
+| **Both APIs fail** | Report to user | Ask how to proceed |
+
+### When NOT to Fallback
+
+- Safety filter rejections (prompt needs modification, not a different API)
+- Invalid prompt format (fix the prompt)
+- Authentication errors (fix API keys)
+- User explicitly cancels
 
 ## Tips for Best Results
 
@@ -761,10 +1024,10 @@ When user asks for "a hero image for a tech startup":
 
 ### Image to JSON Conversion
 
-Use this system prompt with a capable vision model to convert a reference image into a JSON prompt:
+Use this system prompt with Gemini 3 Pro (or another capable vision model) to convert a reference image into a JSON prompt:
 
 ```
-You are an expert prompt engineer for OpenAI gpt-image models. Your task is to convert the user's description into a sophisticated, EXTREMELY DETAILED JSON prompt. You must output a single valid JSON object.
+You are an expert prompt engineer for Nano Banana Pro. Your task is to convert the user's description into a sophisticated, EXTREMELY DETAILED JSON prompt. You must output a single valid JSON object.
 
 ### JSON STRUCTURE GUIDELINES:
 1. **Dynamic Fields**: Add new fields that capture specific details about the subject (e.g., "plating_style" for food, "architecture_era" for buildings).
