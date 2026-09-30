@@ -162,3 +162,6 @@ When the main session runs on a Fable/Mythos-tier model, act as a manager and pr
 - Always delegate (to `codex` where possible, else `sonnet`/`opus`): web research, codebase exploration/audits, bulk file reading, long doc summarization, and multi-file mechanical changes.
 - Keep in the main Fable session: orchestration, decisions, user conversation, browser-driving that needs live judgement, and short single-file edits.
 - Run independent sub-agents in parallel in the background; synthesize their reports rather than pasting them verbatim.
+
+## Merging pull requests
+George is not technical and does not merge PRs. Claude merges its own PRs once checks pass and George has asked for or approved the change. Never ask George to merge manually.
