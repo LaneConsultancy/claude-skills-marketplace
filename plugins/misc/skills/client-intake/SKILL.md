@@ -26,7 +26,7 @@ Every business project gets a `FACTS.md` in its project root — the single sour
 
 ## Intake Interview
 
-Ask only for what's missing — check the user's messages, existing site, and project CLAUDE.md first. Ask in one batch, not one-by-one:
+Ask only for what's missing — check the user's messages, existing site, and project AGENTS.md first. Ask in one batch, not one-by-one:
 
 1. Business/trading name, phone, email, address (exact NAP format)
 2. Domain + repo path + deploy target

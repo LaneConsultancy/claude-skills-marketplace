@@ -7,7 +7,7 @@ description: Use when operating a Google Business Profile for an agency client �
 
 ## Overview
 
-Operate (not just audit — that's `seo-local`) client GBPs via browser automation on business.google.com. The GBP API is application-gated, so the browser IS the tool: use Claude-in-Chrome or Playwright, logged into the client's managing Google account.
+Operate (not just audit — that's `seo-local`) client GBPs via browser automation on business.google.com. The GBP API is application-gated, so the browser IS the tool: use Codex-in-Chrome or Playwright, logged into the client's managing Google account.
 
 ## Hard Rules
 
@@ -47,7 +47,7 @@ Note: GBP Q&A was removed by Google (Dec 2025). Common questions (parking, prici
 - Re-check primary/secondary categories against Google's evolving list (report findings; rule 5 still applies — never change the primary category without George asking).
 - Audit the services section against FACTS.md; check for duplicate or "permanently closed" listings.
 
-Source for the ranking claims above: `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md`.
+Source for the ranking claims above: `~/.Codex/skills/references/shared-seo/local-seo-playbook-2026.md`.
 
 ## Workflow
 

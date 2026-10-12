@@ -11,7 +11,7 @@ Sibling rank-and-rent sites share design, never copy. Google treats town-name-sw
 
 ## When to Use
 
-- Step 9 of the rank-and-rent factory (`~/.claude/guides/WORKFLOW-TEMPLATES.md`) — blocking gate before launch
+- Step 9 of the rank-and-rent factory (`~/.Codex/guides/WORKFLOW-TEMPLATES.md`) — blocking gate before launch
 - After ANY copy edit to a site that has siblings
 - Before launch of a site cloned from a SOURCE design site
 - FACTS.md lists the sibling sites — audit against all of them
@@ -19,11 +19,11 @@ Sibling rank-and-rent sites share design, never copy. Google treats town-name-sw
 ## Run It
 
 ```bash
-python3 ~/.claude/skills/sibling-uniqueness-audit/audit.py \
+python3 ~/.Codex/skills/sibling-uniqueness-audit/audit.py \
   "/path/to/Site A" "/path/to/Site B" ["/path/to/Site C" ...]
 ```
 
-- Scans `src/` only; skips specs, README, CLAUDE.md, node_modules, dist
+- Scans `src/` only; skips specs, README, AGENTS.md, node_modules, dist
 - **Reads page copy wherever it lives** — markup (`.astro/.md/.mdx/.html`) *and* content data
   modules (`.ts/.tsx/.js/.jsx`), because on these sites every customer-facing word is an HTML
   string in `src/data/services.ts`, not in a template

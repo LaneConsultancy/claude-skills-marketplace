@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rank & Rent Website Builder"
+  short_description: "Astro sites for local lead-gen niches."
+  default_prompt: "Build a rank-and-rent Astro website for [service] in [location]."
