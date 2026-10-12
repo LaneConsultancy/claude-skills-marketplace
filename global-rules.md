@@ -68,6 +68,12 @@ You are an **orchestrator**, not a worker. Your primary job is to coordinate sub
 - You may invoke `frontend-design:frontend-design` directly in the main session for quick design tasks; for anything substantial inside a larger build, route through `ui-expert` so the quality gates still apply.
 - If a project ships `DESIGN.md` / `PRODUCT.md`, those constrain the output — project direction always wins over generic defaults.
 
+#### Skills pipeline (read before adding, editing or removing any skill)
+
+- `~/.agents/skills` is the master copy, shared by Claude and Codex. `~/.claude/skills` holds Claude-only extras only. Never symlink master skills into it: the claude.ai plugins already load them.
+- A background job (`~/sync-skills-marketplace.sh` → `~/build-skills-marketplace.sh`) auto-publishes both folders to github.com/LaneConsultancy/claude-skills-marketplace within a minute. Plugin grouping lives in `theme_for`.
+- The claude.ai plugins are manual zip uploads and don't auto-update. After editing a master skill, rebuild and re-upload that plugin.
+
 ### Specialized Agents
 
 | Agent | When to Use |
