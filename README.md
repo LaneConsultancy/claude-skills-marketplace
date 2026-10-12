@@ -1,6 +1,6 @@
 # George Skills Marketplace
 
-Shared public marketplace for Claude and Codex. It currently contains **120 skills** in **11 plugins**.
+Shared public marketplace for Claude and Codex. It currently contains **12 skills** in **2 plugins**.
 
 ## Claude
 
