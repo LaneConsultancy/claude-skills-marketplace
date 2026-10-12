@@ -22,7 +22,7 @@ You are an **orchestrator**, not a worker. Your primary job is to coordinate sub
 - **Codebase exploration** - Use `subagent_type=Explore` for ANY codebase questions, file searches, or understanding code structure
 - **Code writing/editing** - Use `subagent_type=coder` for implementing features, fixing bugs, refactoring
 - **Code review** - Use `subagent_type=code-reviewer` after code changes
-- **UI/UX feedback and design** - Use `subagent_type=ui-expert` for design decisions and building UI's (the `ui-expert` agent runs the **`impeccable`** skill internally — see "Canonical Design Engine" below)
+- **UI/UX feedback and design** - Use `subagent_type=ui-expert` for design decisions and building UI's (the `ui-expert` agent runs Anthropic's **`frontend-design`** skill internally — see "Canonical Design Engine" below)
 - **Planning** - Use `subagent_type=Plan` for complex implementation planning
 - **Multi-step research** - Use `subagent_type=general-purpose` for complex investigations
 - **Writing content & copy** - Use `subagent_type=copywriter` for all copy and content for websites
@@ -55,18 +55,18 @@ You are an **orchestrator**, not a worker. Your primary job is to coordinate sub
 
 | Agent | When to Use |
 |-------|-------------|
-| `ui-expert` | UI/UX guidance, responsive layouts, design system selection, reviewing UI implementations, ensuring responsive behavior across devices, AND building/polishing/auditing UI. Runs the **`impeccable`** skill internally as its design engine — this is the single entry point for all design work. |
+| `ui-expert` | UI/UX guidance, responsive layouts, design system selection, reviewing UI implementations, ensuring responsive behavior across devices, AND building/polishing/auditing UI. Runs Anthropic's **`frontend-design`** skill internally as its design engine — this is the single entry point for all design work. |
 | `art-director` | Generate visual assets - hero images, social media graphics, product photography mockups, illustrations, removing backgrounds from images. |
 | `quality-check` | Verify project ready for release - visual appearance, copy quality, image appropriateness, detecting AI-generated content issues, functionality testing. Use before deployment or after major features. |
 
-#### Canonical Design Engine: `impeccable`
+#### Canonical Design Engine: `frontend-design` (Anthropic official plugin)
 
-**`impeccable` is the single source of truth for all frontend/UI design in this workspace.** It carries the visual system, anti-pattern library, WCAG 2.1 AA gates, and live browser-iteration tooling.
+**`frontend-design@claude-plugins-official` is the single source of truth for frontend/UI design in this workspace** (switched from `impeccable` on 2026-10-12). Accessibility and visual-verification gates live in the `frontend-quality-gates` skill.
 
-- **Do NOT use** the deprecated/overlapping design skills (`design-system`, `redesign-skill`, `soft-skill`, `taste-skill`, `frontend-design-extensions`, `unslop-react-design`, `brutalist-skill`, `minimalist-skill`, `design-aesthetics`) or the `frontend-design` plugin. They have been removed/disabled to avoid contradictory direction.
-- **The subagent workflow is preserved:** continue to spawn `subagent_type=ui-expert` for design decisions, builds, reviews, and polish. The `ui-expert` agent invokes `impeccable` internally — so you get the orchestration workflow AND the impeccable engine in one step.
-- You may invoke `/impeccable` directly in the main session for quick design tasks; for anything substantial inside a larger build, route through `ui-expert` so the quality gates below still apply.
-- If a project ships `DESIGN.md` / `PRODUCT.md`, those constrain impeccable's output — project direction always wins over generic defaults.
+- **Do NOT use** `impeccable` or the older overlapping design skills (`design-system`, `redesign-skill`, `soft-skill`, `taste-skill`, `frontend-design-extensions`, `unslop-react-design`, `brutalist-skill`, `minimalist-skill`, `design-aesthetics`). They are deactivated to avoid contradictory direction.
+- **The subagent workflow is preserved:** spawn `subagent_type=ui-expert` for design decisions, builds, reviews, and polish. It invokes `frontend-design` internally.
+- You may invoke `frontend-design:frontend-design` directly in the main session for quick design tasks; for anything substantial inside a larger build, route through `ui-expert` so the quality gates still apply.
+- If a project ships `DESIGN.md` / `PRODUCT.md`, those constrain the output — project direction always wins over generic defaults.
 
 ### Specialized Agents
 

@@ -245,7 +245,7 @@ the constant token API, the accessibility thresholds, the component contracts, t
 and the per-site variation axes. Where `DESIGN.md` and generic design guidance disagree, `DESIGN.md`
 wins. A build that has not read it will reproduce the defects it exists to prevent.
 
-New public-facing rank-and-rent sites must use the `impeccable` design skill/guidance during frontend shaping, implementation, and polish, constrained by `DESIGN.md`. Treat frontend craft as part of conversion and SEO quality, not afterthought polish.
+New public-facing rank-and-rent sites must use the `frontend-design` skill during frontend shaping, implementation, and polish, constrained by `DESIGN.md`. Treat frontend craft as part of conversion and SEO quality, not afterthought polish.
 
 ### Per-site design variation is a build requirement
 
@@ -315,7 +315,7 @@ When a rank-and-rent site needs generated raster imagery, the builder may invoke
    - Choose the type pairing and confirm both faces are self-hostable and subsettable. Plus Jakarta
      Sans is banned - it is the existing portfolio's fingerprint.
    - Append the `## Design Variation Record` block to the site's `AGENTS.md` before coding.
-   - Apply `impeccable` design guidance within those constraints: niche-specific direction, image/art
+   - Apply `frontend-design` guidance within those constraints: niche-specific direction, image/art
      direction, typography/spacing rhythm, CTA hierarchy, mobile-first layout.
    - Decide whether imagery will be real/licensed, generated, illustrated/vector/code-native, or omitted; document the asset plan and truth constraints. "No photography" is a legitimate answer.
    - Reject template-looking or AI-default patterns before implementation. Check the shaping against
@@ -325,7 +325,7 @@ When a rank-and-rent site needs generated raster imagery, the builder may invoke
    - Scaffold or update the Astro project.
    - Implement real content, forms/CTAs, metadata, schema, sitemap, and legal pages.
    - Keep owned-site interlinks and agency-network links out of launch pages.
-   - Carry the `impeccable` design direction through components, spacing, imagery, contrast, and responsive states.
+   - Carry the `frontend-design` direction through components, spacing, imagery, contrast, and responsive states.
    - If generated images are used, save accepted project-bound assets into the site workspace and record image path, generation skill/tool, prompt or source summary, and QC status.
 
 6. **Verification**
@@ -423,7 +423,7 @@ Do not call a site complete until:
 - Metadata, schema, sitemap, privacy policy, and terms exist.
 - IndexNow is enabled.
 - Core Web Vitals pass criteria are met: LCP under 2.5s, INP under 300ms, at p75.
-- `impeccable` frontend design guidance has been applied during shaping, implementation, and polish.
+- `frontend-design` skill guidance has been applied during shaping, implementation, and polish.
 - Visual direction is niche-specific, production-grade, and not a generic local-service template.
 - Typography, spacing, imagery, accessible contrast, mobile-first layout, and CTA hierarchy are verified.
 - Any generated images have passed visual QC, are saved inside the site workspace, are documented with path/tool/prompt/QC status, and do not look AI-generated or misleading.
