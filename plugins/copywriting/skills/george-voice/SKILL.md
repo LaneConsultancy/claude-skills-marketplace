@@ -19,6 +19,7 @@ George's writing feels like it's from a real person, not a marketing department 
 **Do:**
 - Use first person ("I wanted to share...")
 - Be direct and honest about the "why"
+- Be polite and thank people for getting in touch
 - Keep paragraphs short (2-4 sentences)
 - Use British English and contractions
 - Express genuine appreciation
