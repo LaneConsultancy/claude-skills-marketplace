@@ -398,7 +398,7 @@ ANTI-SLOP CONTENT CHECK (from `no-ai-slop`):
 - Feels like generic AI writing rather than a specific human voice? = NOT READY
 
 WEB DESIGN PREMIUM-FEEL CHECK (any = NOT READY):
-Halo-effect destroyers from `~/.Codex/knowledgebase/website-design/checklist.md` (canonical gate). See `~/.Codex/knowledgebase/website-design/applying-to-skills.md` for context.
+Halo-effect destroyers from `~/.claude/knowledgebase/website-design/checklist.md` (canonical gate). See `~/.claude/knowledgebase/website-design/applying-to-skills.md` for context.
 - Hero fails 50ms blink test — within half a second, viewer cannot tell what the business is and why it matters; one feeling, not a buffet [KB: principles.md → Halo Effect]
 - Stock-photo cliches — boardroom high-fives, group-around-laptop, faceless suits [KB: anti-patterns.md]
 - No "star of the show" — nothing anchors the eye long enough to convert attention [KB: principles.md]

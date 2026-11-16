@@ -11,7 +11,7 @@ Sibling rank-and-rent sites share design, never copy. Google treats town-name-sw
 
 ## When to Use
 
-- Step 9 of the rank-and-rent factory (`~/.Codex/guides/WORKFLOW-TEMPLATES.md`) — blocking gate before launch
+- Step 9 of the rank-and-rent factory (`~/.claude/guides/WORKFLOW-TEMPLATES.md`) — blocking gate before launch
 - After ANY copy edit to a site that has siblings
 - Before launch of a site cloned from a SOURCE design site
 - FACTS.md lists the sibling sites — audit against all of them
@@ -19,7 +19,7 @@ Sibling rank-and-rent sites share design, never copy. Google treats town-name-sw
 ## Run It
 
 ```bash
-python3 ~/.Codex/skills/sibling-uniqueness-audit/audit.py \
+python3 ~/.agents/skills/sibling-uniqueness-audit/audit.py \
   "/path/to/Site A" "/path/to/Site B" ["/path/to/Site C" ...]
 ```
 

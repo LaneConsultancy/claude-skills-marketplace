@@ -2,7 +2,7 @@
 
 Ranking factors, review benchmarks, citation tiers, and confirmed non-factors for local search.
 
-Source of truth: `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md` (Whitespark 2026 Local Search Ranking Factors, Sterling Sky controlled testing, December 2025 core update). Parts 1, 3, 4, and 5.
+Source of truth: `~/.agents/skills/references/shared-seo/local-seo-playbook-2026.md` (Whitespark 2026 Local Search Ranking Factors, Sterling Sky controlled testing, December 2025 core update). Parts 1, 3, 4, and 5.
 
 ---
 

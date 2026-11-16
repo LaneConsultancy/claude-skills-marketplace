@@ -2,7 +2,7 @@
 
 LocalBusiness subtypes by industry, required/recommended properties, `sameAs` and NAP rules, multi-location and SAB patterns.
 
-Source of truth: `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md` (Part 2, schema and entity consistency).
+Source of truth: `~/.agents/skills/references/shared-seo/local-seo-playbook-2026.md` (Part 2, schema and entity consistency).
 
 ---
 

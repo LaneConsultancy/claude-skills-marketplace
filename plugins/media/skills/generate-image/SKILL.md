@@ -25,7 +25,7 @@ If both models fail, report the error and ask the user how to proceed (retry, ch
 Always call the bundled helper. Do not hand-write API calls.
 
 ```bash
-python3 ~/.claude/skills/generate-image/scripts/generate_image.py \
+python3 ~/.agents/skills/generate-image/scripts/generate_image.py \
   --prompt "YOUR_PROMPT_HERE" \
   --aspect-ratio 3:2 \
   --out public/images/output.png

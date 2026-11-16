@@ -110,7 +110,7 @@ Conversion is decided before copy is read. Audit the page through four psycholog
 - **Peak-end micro-interactions.** Visitors remember peaks and endings, not averages. Felt button states, form-field validation feedback, smooth section transitions, post-submit confirmation — each is a small peak that compounds into "this brand is competent." Static, lifeless pages convert worse than pages that feel alive. [KB: principles.md → Peak-End Rule]
 - **Sell the result, not the feature.** Nobody wakes up wanting your product — they want the transformation. Rewrite feature lines as outcome statements ("ship in a day" not "drag-and-drop builder"). [KB: principles.md → Sell the result]
 
-See also: `~/.Codex/knowledgebase/website-design/applying-to-skills.md` (page-cro mapping).
+See also: `~/.claude/knowledgebase/website-design/applying-to-skills.md` (page-cro mapping).
 
 ---
 

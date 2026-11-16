@@ -216,7 +216,7 @@ If no sitemap is found: emit WARN, and fall back to crawling homepage `<a href>`
    ```
    No hit on either → WARN. This is a "best effort" check, not a guarantee of absence: a site can have IndexNow enabled (e.g. via Cloudflare's IndexNow toggle) without any of these traces. Note the limitation in the report.
 
-7. **Bing Places claim:** cannot be checked via HTTP at all. Word this as a manual confirmation item in the report rather than an automated check. Ask the user to confirm the business is claimed on Bing Places (bing.com/places). Unconfirmed → WARN. Matters because ChatGPT's live web search runs on Bing's index, so a site optimised only for Google is invisible to it. See `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md` (Part 6) for background.
+7. **Bing Places claim:** cannot be checked via HTTP at all. Word this as a manual confirmation item in the report rather than an automated check. Ask the user to confirm the business is claimed on Bing Places (bing.com/places). Unconfirmed → WARN. Matters because ChatGPT's live web search runs on Bing's index, so a site optimised only for Google is invisible to it. See `~/.agents/skills/references/shared-seo/local-seo-playbook-2026.md` (Part 6) for background.
 
 ### Step 7. Classify every finding
 

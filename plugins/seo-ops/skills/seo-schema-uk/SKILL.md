@@ -99,7 +99,7 @@ When generating schema for a page:
 
 ### LocalBusiness
 
-Use the specific subtype where one exists (Plumber, HVACBusiness, Electrician, Restaurant, Dentist, etc.), not generic LocalBusiness. **NAP rule: name, address, and telephone must match the Google Business Profile character for character** — Google cross-references schema, site, GBP, and directories to validate the entity, and inconsistency is a demotion signal. The `sameAs` array is how you explicitly tell Google "these profiles are all the same entity": include the GBP listing, social profiles, and key directory listings. (Source: `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md`.)
+Use the specific subtype where one exists (Plumber, HVACBusiness, Electrician, Restaurant, Dentist, etc.), not generic LocalBusiness. **NAP rule: name, address, and telephone must match the Google Business Profile character for character** — Google cross-references schema, site, GBP, and directories to validate the entity, and inconsistency is a demotion signal. The `sameAs` array is how you explicitly tell Google "these profiles are all the same entity": include the GBP listing, social profiles, and key directory listings. (Source: `~/.agents/skills/references/shared-seo/local-seo-playbook-2026.md`.)
 
 ```json
 {

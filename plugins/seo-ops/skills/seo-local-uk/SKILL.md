@@ -22,7 +22,7 @@ allowed-tools:
 
 # Local SEO Analysis (March 2026)
 
-Source of truth for ranking weights, GBP factors, review and citation guidance: `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md` (Whitespark 2026, Sterling Sky controlled testing, December 2025 core update).
+Source of truth for ranking weights, GBP factors, review and citation guidance: `~/.agents/skills/references/shared-seo/local-seo-playbook-2026.md` (Whitespark 2026, Sterling Sky controlled testing, December 2025 core update).
 
 ## Key Statistics
 

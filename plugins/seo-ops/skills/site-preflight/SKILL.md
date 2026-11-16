@@ -21,10 +21,10 @@ baked into built output, and title-doubling (layout template + hardcoded suffix)
 ## Run It
 
 ```bash
-python3 ~/.Codex/skills/site-preflight/preflight.py "/path/to/Site"
+python3 ~/.agents/skills/site-preflight/preflight.py "/path/to/Site"
 
 # For a cloned site, pass sibling tokens that must NOT appear in the clone:
-python3 ~/.Codex/skills/site-preflight/preflight.py "/path/to/Tiverton Boiler Repairs" \
+python3 ~/.agents/skills/site-preflight/preflight.py "/path/to/Tiverton Boiler Repairs" \
   --contaminants "south molton,southmoltonboilers,01769,EX36,07590491329"
 ```
 

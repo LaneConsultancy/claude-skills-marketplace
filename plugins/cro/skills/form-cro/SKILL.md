@@ -65,7 +65,7 @@ For each field, ask:
 
 ## Web Design Principles Applied
 
-Three principles from the web-design knowledgebase that govern form flow. The frame: peak-end on submit confirmation; trust without stock-photo testimonials. See `~/.Codex/knowledgebase/website-design/applying-to-skills.md`.
+Three principles from the web-design knowledgebase that govern form flow. The frame: peak-end on submit confirmation; trust without stock-photo testimonials. See `~/.claude/knowledgebase/website-design/applying-to-skills.md`.
 
 - **Peak-end rule.** People remember a form by its peaks and how it ended. The submit-confirmation moment is the peak — generic "Thanks, we'll be in touch" wastes it. Engineer the confirmation: name back to them, specific next step, expected response time, a small visual delight. [KB: principles.md → Peak-End Rule]
 - **Cognitive load.** Every field, label, helper line, and visual element costs effort. Cut until the path is one obvious next step — fewer fields beats clever microcopy, predictable layout beats "interesting" layout. [KB: principles.md → Cognitive Load]

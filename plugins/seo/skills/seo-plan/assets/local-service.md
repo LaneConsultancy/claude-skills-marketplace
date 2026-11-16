@@ -1,7 +1,7 @@
 <!-- Updated: 2026-07-06 -->
 # Local Service Business SEO Strategy Template
 
-Source of truth: `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md` (Whitespark 2026, Sterling Sky controlled testing, December 2025 core update analysis). Read it for the evidence behind these rules.
+Source of truth: `~/.agents/skills/references/shared-seo/local-seo-playbook-2026.md` (Whitespark 2026, Sterling Sky controlled testing, December 2025 core update analysis). Read it for the evidence behind these rules.
 
 ## Industry Characteristics
 

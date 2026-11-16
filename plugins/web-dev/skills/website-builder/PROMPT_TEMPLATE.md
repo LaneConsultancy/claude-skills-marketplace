@@ -230,6 +230,6 @@ This works for quick projects but for complex sites (100+ pages), use the `/spec
 
 | File | Purpose |
 |------|---------|
-| `~/.claude/skills/website-builder/SKILL.md` | Skill definition with quality gates |
-| `~/.claude/skills/website-builder/PROMPT_TEMPLATE.md` | This file - copy-paste prompts |
-| `~/.claude/skills/website-builder/SPEC_TEMPLATE.md` | Template for website specifications |
+| `~/.agents/skills/website-builder/SKILL.md` | Skill definition with quality gates |
+| `~/.agents/skills/website-builder/PROMPT_TEMPLATE.md` | This file - copy-paste prompts |
+| `~/.agents/skills/website-builder/SPEC_TEMPLATE.md` | Template for website specifications |

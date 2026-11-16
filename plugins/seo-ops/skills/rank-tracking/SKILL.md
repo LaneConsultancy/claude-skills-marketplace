@@ -23,7 +23,7 @@ Config entry per tracked keyword:
 ## Run
 
 ```bash
-python3 ~/.Codex/skills/rank-tracking/track.py \
+python3 ~/.agents/skills/rank-tracking/track.py \
   "$HOME/Dropbox/Projects/Rank and Rent/tools/rank-tracking/keywords.json"
 ```
 

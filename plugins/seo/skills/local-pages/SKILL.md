@@ -160,7 +160,7 @@ Post-December 2025, Google applies E-E-A-T expectations to competitive local que
 - **An original photo of real work completed in that area:** never stock imagery. Geotagging the photo does nothing: Google strips EXIF data on upload. The photo matters as E-E-A-T evidence, not as a coordinate signal
 - **A specific testimonial naming the town and the job:** "Sorted our burst pipe in Dartford within the hour" beats "Great service!"
 
-See `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md` for the full reasoning behind this requirement.
+See `~/.agents/skills/references/shared-seo/local-seo-playbook-2026.md` for the full reasoning behind this requirement.
 
 ### Phase 4: Writing
 

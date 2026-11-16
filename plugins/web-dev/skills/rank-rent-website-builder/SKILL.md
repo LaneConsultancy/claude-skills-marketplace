@@ -191,7 +191,7 @@ Optional when justified by SERP/content depth:
 - `/areas/[nearby-location]/` for nearby places with enough real search intent
 - `/faqs/` only if FAQ depth would otherwise bloat the homepage
 
-Avoid large service x location matrices for the first build unless research shows real demand and enough unique supportable content. Cap primary location pages at 3-6, and gate every one on genuinely unique local content: it must pass the removed-city-name test (take the town name out; if the page isn't still obviously about that place, it's a doorway page) with roughly 50% of the content genuinely location-specific. Document any matrix decision in `spec/keyword-map.md` and `spec/content-plan.md`. See `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md` for the reasoning behind this cap.
+Avoid large service x location matrices for the first build unless research shows real demand and enough unique supportable content. Cap primary location pages at 3-6, and gate every one on genuinely unique local content: it must pass the removed-city-name test (take the town name out; if the page isn't still obviously about that place, it's a doorway page) with roughly 50% of the content genuinely location-specific. Document any matrix decision in `spec/keyword-map.md` and `spec/content-plan.md`. See `~/.agents/skills/references/shared-seo/local-seo-playbook-2026.md` for the reasoning behind this cap.
 
 ## Content Standards
 

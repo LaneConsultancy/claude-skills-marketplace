@@ -7,7 +7,7 @@ description: "Build a complete website for a local business with mandatory quali
 
 **You are a coordinator. You do NOT write code yourself. You orchestrate agents and enforce quality gates.**
 
-**Local SEO source of truth:** `~/.claude/skills/references/shared-seo/local-seo-playbook-2026.md` (Whitespark 2026, Sterling Sky, December 2025 core update). The location/matrix page strategy, schema, GBP link, and launch rules in this skill follow that playbook. Read it for the evidence behind these rules.
+**Local SEO source of truth:** `~/.agents/skills/references/shared-seo/local-seo-playbook-2026.md` (Whitespark 2026, Sterling Sky, December 2025 core update). The location/matrix page strategy, schema, GBP link, and launch rules in this skill follow that playbook. Read it for the evidence behind these rules.
 
 ## AUTONOMOUS EXECUTION MODE
 
@@ -806,7 +806,7 @@ When quality-checking matrix pages, verify:
 
 #### Web Design Quality Gate (Premium-Feel Halo Check)
 
-Zero auto-fail items from `~/.Codex/knowledgebase/website-design/checklist.md`. The quality-check agent's auto-fail criteria now cover: 50ms halo, opacity hierarchy, star of show, no felt hover states. Verify on homepage + one inner page at all three viewports:
+Zero auto-fail items from `~/.claude/knowledgebase/website-design/checklist.md`. The quality-check agent's auto-fail criteria now cover: 50ms halo, opacity hierarchy, star of show, no felt hover states. Verify on homepage + one inner page at all three viewports:
 
 - **50ms blink test** — within half a second of load, hero communicates what the business does and why it matters [KB: checklist.md → Hero/50ms].
 - **Opacity hierarchy present** — body copy uses 100/87/60 tiers, not all 100% [KB: checklist.md → Typography/Opacity].
