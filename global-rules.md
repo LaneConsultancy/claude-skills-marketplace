@@ -83,6 +83,7 @@ How to change a skill:
 - Never put skills in `~/.claude/skills/` (they would load twice). Old copies were moved to `~/skills-backup-2026-11-16/`.
 - Claude plugins have no `version` field on purpose, so every push is an update. Do not add one back.
 - To pull an update at once: `claude plugin marketplace update george-skills` locally; "Check for updates" on the marketplace in claude.ai.
+- claude.ai "Sync automatically" did not fire within minutes in the 16 Nov 2026 test; a check was scheduled for 17 Nov. If claude.ai lags, use "Check for updates" (Customize > Plugins > Add > Manage marketplaces > "…").
 - Script paths inside skills use `~/.agents/skills/<skill>/...`, never `~/.claude/skills/` or `~/.Codex/`.
 
 ### Specialized Agents
