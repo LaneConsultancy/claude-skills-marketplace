@@ -70,9 +70,20 @@ You are an **orchestrator**, not a worker. Your primary job is to coordinate sub
 
 #### Skills pipeline (read before adding, editing or removing any skill)
 
-- `~/.agents/skills` is the master copy, shared by Claude and Codex. `~/.claude/skills` holds Claude-only extras only. Never symlink master skills into it: the claude.ai plugins already load them.
-- A background job (`~/sync-skills-marketplace.sh` → `~/build-skills-marketplace.sh`) auto-publishes both folders to github.com/LaneConsultancy/claude-skills-marketplace within a minute. Plugin grouping lives in `theme_for`.
-- The claude.ai plugins are manual zip uploads and don't auto-update. After editing a master skill, rebuild and re-upload that plugin.
+The **single source of truth** is the private GitHub repo `LaneConsultancy/claude-skills-marketplace` (marketplace name `george-skills`). Every Claude reads its skills from there (set up 16 Nov 2026):
+
+- **Claude Code on this Mac:** the 10 plugins are installed from the `george-skills` marketplace (user scope, `autoUpdate: true` in `~/.claude/settings.json`). Skill names look like `copywriting:george-voice`.
+- **claude.ai chat, desktop chat, Cowork:** the same repo is added as a marketplace in Customize > Plugins, with "Sync automatically" on. Never upload plugin zips under "My Uploads" again.
+- **Codex:** reads `~/.agents/skills` (the editing folder below).
+- **Claude Code on the web (cloud sessions):** cannot load marketplace plugins at present (Anthropic limit). Do not copy skills into repos to work around it without asking George.
+
+How to change a skill:
+- Edit ONLY in `~/.agents/skills/<skill>/`. A background job (`~/sync-skills-marketplace.sh` → `~/build-skills-marketplace.sh`, launchd) pushes it to the GitHub repo within about a minute. Plugin grouping lives in `theme_for` in the build script.
+- Never edit copies in `~/.claude/plugins/`, the claude.ai UI, or the repo clone at `~/claude-skills-marketplace` (the sync overwrites it).
+- Never put skills in `~/.claude/skills/` (they would load twice). Old copies were moved to `~/skills-backup-2026-11-16/`.
+- Claude plugins have no `version` field on purpose, so every push is an update. Do not add one back.
+- To pull an update at once: `claude plugin marketplace update george-skills` locally; "Check for updates" on the marketplace in claude.ai.
+- Script paths inside skills use `~/.agents/skills/<skill>/...`, never `~/.claude/skills/` or `~/.Codex/`.
 
 ### Specialized Agents
 

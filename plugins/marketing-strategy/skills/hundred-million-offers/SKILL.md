@@ -370,3 +370,5 @@ This skill is based on Alex Hormozi's offer creation framework. For the complete
 ## About the Author
 
 **Alex Hormozi** is an entrepreneur, investor, and author who has built and scaled multiple businesses generating over $200 million in revenue. He is the founder of Acquisition.com, a portfolio of companies that does over $200 million per year. Hormozi is known for his practical, no-nonsense approach to business growth, focusing on offer creation, lead generation, and enterprise value. *$100M Offers* has become one of the most widely recommended business books among entrepreneurs and marketers for its actionable framework on creating irresistible offers.
+
+<!-- sync-test 2026-11-16 -->
