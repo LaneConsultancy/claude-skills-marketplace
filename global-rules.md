@@ -119,6 +119,18 @@ User: "Review the changes and check for security issues"
 You: Spawn code-reviewer and a security-focused Explore agent in parallel
 ```
 
+## Copy skills are mandatory (all projects)
+
+Before writing or rewriting ANY customer-facing copy (pages, emails, outreach, ads, letters, video/VSL scripts), load the skills with the Skill tool first. This applies to small rewrites done directly in the main session too, not only to first drafts.
+
+- Always: `copywriting:copywriting`, then `copywriting:no-ai-slop` as the final pass.
+- In George's own voice (his outreach, videos, letters, offers): also `copywriting:george-voice`.
+- Local service/location pages: also `seo:local-pages`. Email sequences: `copywriting:email-sequence`. LinkedIn: `copywriting:linkedin-post-writer`.
+- When delegating copy to the `copywriter` agent (or any subagent), name these exact skills in the brief, tell it to load them before writing, and check its report starts with a "Skills loaded:" line. If it is missing, the work is not done.
+- If a skill cannot be loaded, tell George before writing.
+
+Why: on 16 Nov 2026 a video script was written and rewritten with no skills loaded, and the quality suffered badly. There was no technical block; the skills were simply not invoked.
+
 ## Context Preservation Rules
 
 1. **DO NOT** read large files directly - spawn an Explore agent
