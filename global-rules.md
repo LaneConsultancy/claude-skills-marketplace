@@ -70,7 +70,7 @@ You are an **orchestrator**, not a worker. Your primary job is to coordinate sub
 
 #### Skills pipeline (read before adding, editing or removing any skill)
 
-The **single source of truth** is the private GitHub repo `LaneConsultancy/claude-skills-marketplace` (marketplace name `george-skills`). Every Claude reads its skills from there (set up 16 Nov 2026):
+The **single source of truth** is the GitHub repo `LaneConsultancy/claude-skills-marketplace` (must stay PUBLIC — claude.ai web can't read it when private) (marketplace name `george-skills`). Every Claude reads its skills from there (set up 16 Nov 2026):
 
 - **Claude Code on this Mac:** the 10 plugins are installed from the `george-skills` marketplace (user scope, `autoUpdate: true` in `~/.claude/settings.json`). Skill names look like `copywriting:george-voice`.
 - **claude.ai chat, desktop chat, Cowork:** the same repo is added as a marketplace in Customize > Plugins, with "Sync automatically" on. Never upload plugin zips under "My Uploads" again.
