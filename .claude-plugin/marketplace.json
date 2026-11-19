@@ -10,7 +10,7 @@
     { "name": "design", "source": "./plugins/design", "description": "Frontend design: impeccable and taste-skill. (2 skills)" },
     { "name": "marketing-strategy", "source": "./plugins/marketing-strategy", "description": "Marketing strategy: Hormozi $100M offers. (1 skills)" },
     { "name": "media", "source": "./plugins/media", "description": "Media: image generation and background removal. (2 skills)" },
-    { "name": "misc", "source": "./plugins/misc", "description": "Miscellaneous skills not yet categorized. (7 skills)" },
+    { "name": "misc", "source": "./plugins/misc", "description": "Miscellaneous skills not yet categorized. (8 skills)" },
     { "name": "seo", "source": "./plugins/seo", "description": "SEO toolkit: audits, technical, schema, sitemaps, local, programmatic, content. (16 skills)" },
     { "name": "seo-ops", "source": "./plugins/seo-ops", "description": "George's own SEO additions: UK local/schema overlays, local site architecture, GBP management, rank tracking, launch preflight and clone-dedup tooling. (7 skills)" },
     { "name": "web-dev", "source": "./plugins/web-dev", "description": "Web development: local-business site builders (Vercel) and Cloudflare deploys. (4 skills)" }
