@@ -6,6 +6,7 @@
     { "name": "business-ops", "source": { "source": "local", "path": "./plugins/business-ops" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" },
     { "name": "copywriting", "source": { "source": "local", "path": "./plugins/copywriting" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" },
     { "name": "cro", "source": { "source": "local", "path": "./plugins/cro" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" },
+    { "name": "design", "source": { "source": "local", "path": "./plugins/design" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" },
     { "name": "marketing-strategy", "source": { "source": "local", "path": "./plugins/marketing-strategy" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" },
     { "name": "media", "source": { "source": "local", "path": "./plugins/media" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" },
     { "name": "misc", "source": { "source": "local", "path": "./plugins/misc" }, "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" }, "category": "Productivity" },
